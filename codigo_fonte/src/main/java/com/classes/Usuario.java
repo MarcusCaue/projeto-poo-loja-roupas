@@ -68,5 +68,10 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public String toString() {
+		return "Usuario [nome=" + nome + ", id=" + id + ", endereco=" + endereco + ", tel=" + tel + ", email=" + email
+				+ ", senha=" + senha + "]";
+	}
 	
 }
