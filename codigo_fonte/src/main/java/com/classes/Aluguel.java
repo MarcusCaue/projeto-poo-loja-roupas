@@ -68,6 +68,9 @@ public class Aluguel {
 	public void setAlugador(Usuario alugador) {
 		this.alugador = alugador;
 	}
-	
+
+	public String toString() {
+		return "Aluguel [id = " + id + ", Data de início = " + dataInicio + ", Data final = " + dataFim + ", Valor do aluguel = " + valorAluguel + ", alugador = " + alugador + "]";
+	}
 
 }
