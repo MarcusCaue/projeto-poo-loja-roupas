@@ -1,5 +1,4 @@
 package com.classes;
-
 import java.util.ArrayList;
 
 public class Usuario {
@@ -10,15 +9,15 @@ public class Usuario {
 	private ArrayList<String> tel;
 	private ArrayList<String> email;
 	private String senha;
-	
-	//Ent = ENTRADA
-	public Usuario(String nomeEnt,int idEnt,String enderecoEnt,ArrayList<String> telEnt,ArrayList<String> emailEnt, String senhaEnt) {
-	this.nome = nomeEnt;
-	this.id = idEnt;
-	this.endereco = enderecoEnt;
-	this.tel = telEnt;
-	this.email = emailEnt;
-	this.senha = senhaEnt;
+
+	// Ent = ENTRADA
+	public Usuario(String nomeEnt, int idEnt, String enderecoEnt, ArrayList<String> telEnt, ArrayList<String> emailEnt, String senhaEnt) {
+		this.nome = nomeEnt;
+		this.id = idEnt;
+		this.endereco = enderecoEnt;
+		this.tel = telEnt;
+		this.email = emailEnt;
+		this.senha = senhaEnt;
 	}
 
 	public String getNome() {
@@ -73,5 +72,5 @@ public class Usuario {
 		return "Usuario [nome=" + nome + ", id=" + id + ", endereco=" + endereco + ", tel=" + tel + ", email=" + email
 				+ ", senha=" + senha + "]";
 	}
-	
+
 }

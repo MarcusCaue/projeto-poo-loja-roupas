@@ -2,23 +2,23 @@ package com.classes;
 import com.classes.roupas.*;
 
 public class Aluguel {
-	
+
 	private int id;
 	private String dataInicio;
 	private String dataFim;
 	private Roupa roupa;
 	private double valorAluguel;
 	private Usuario alugador;
-	
-	public Aluguel(int idEnt,String dataInicioEnt,String dataFimEnt,Roupa roupaEnt, double valorAluguelEnt, Usuario alugadorEnt) {
-		
+
+	public Aluguel(int idEnt, String dataInicioEnt, String dataFimEnt, Roupa roupaEnt, double valorAluguelEnt, Usuario alugadorEnt) {
+
 		this.id = idEnt;
 		this.dataInicio = dataInicioEnt;
 		this.dataFim = dataFimEnt;
 		this.roupa = roupaEnt;
 		this.valorAluguel = valorAluguelEnt;
 		this.alugador = alugadorEnt;
-		
+
 	}
 
 	public int getId() {
@@ -70,7 +70,8 @@ public class Aluguel {
 	}
 
 	public String toString() {
-		return "Aluguel [id = " + id + ", Data de início = " + dataInicio + ", Data final = " + dataFim + ", Valor do aluguel = " + valorAluguel + ", alugador = " + alugador + "]";
+		return "Aluguel [id = " + id + ", Data de início = " + dataInicio + ", Data final = " + dataFim
+				+ ", Valor do aluguel = " + valorAluguel + ", alugador = " + alugador + "]";
 	}
 
 }
