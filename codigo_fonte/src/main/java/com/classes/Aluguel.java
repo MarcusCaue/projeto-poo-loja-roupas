@@ -1,3 +1,9 @@
+/** ## Regra de Negócio
+ * 
+ * O valor de cada aluguel será: (preçoRoupa + (15.00 * quantidade de semanas))
+ * 
+*/
+
 package com.classes;
 import com.classes.roupas.*;
 
