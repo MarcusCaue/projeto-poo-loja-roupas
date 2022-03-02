@@ -1,17 +1,16 @@
 package com.classes;
-import java.util.ArrayList;
 
 public class Usuario {
 
 	private String nome;
 	private int id;
 	private String endereco;
-	private ArrayList<String> tel;
-	private ArrayList<String> email;
+	private String tel;
+	private String email;
 	private String senha;
 
 	// Ent = ENTRADA
-	public Usuario(String nomeEnt, int idEnt, String enderecoEnt, ArrayList<String> telEnt, ArrayList<String> emailEnt, String senhaEnt) {
+	public Usuario(String nomeEnt, int idEnt, String enderecoEnt, String telEnt, String emailEnt, String senhaEnt) {
 		this.nome = nomeEnt;
 		this.id = idEnt;
 		this.endereco = enderecoEnt;
@@ -24,53 +23,52 @@ public class Usuario {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String novoNome) {
+		this.nome = novoNome;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int novoId) {
+		this.id = novoId;
 	}
 
 	public String getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setEndereco(String novoEndereco) {
+		this.endereco = novoEndereco;
 	}
 
-	public ArrayList<String> getTel() {
+	public String getTel() {
 		return tel;
 	}
 
-	public void setTel(ArrayList<String> tel) {
-		this.tel = tel;
+	public void setTel(String novoTel) {
+		this.tel = novoTel;
 	}
 
-	public ArrayList<String> getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(ArrayList<String> email) {
-		this.email = email;
+	public void setEmail(String novoEmail) {
+		this.email = novoEmail;
 	}
 
 	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSenha(String novaSenha) {
+		this.senha = novaSenha;
 	}
 
 	public String toString() {
-		return "Usuario [nome=" + nome + ", id=" + id + ", endereco=" + endereco + ", tel=" + tel + ", email=" + email
-				+ ", senha=" + senha + "]";
+		return "Usuario [nome=" + nome + ", id=" + id + ", endereco=" + endereco + ", tel=" + tel + ", email=" + email + ", senha=" + senha + "]";
 	}
 
 }

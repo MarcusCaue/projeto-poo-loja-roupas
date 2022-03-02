@@ -9,13 +9,15 @@ import java.text.SimpleDateFormat;
 
 public class Main {
 
-    public Aluguel alugar() {
-        /* 
+    /* public Aluguel alugar() {
+        
+        // Verificar se quem está alugando é um funcionário da loja ou um usuário comum;
+
          * import java.util.Scanner;
          * import java.util.Calendar;
          * import java.text.SimpleDateFormat;
          * 
-        */
+    
 
         Scanner entrada = new Scanner(System.in);
 
@@ -78,9 +80,34 @@ public class Main {
                 return a1;
             }
         }
+    } */
+
+    // Método que irá exibir um pequeno título
+    public static void titulo(String msg) {
+        System.out.println("\n=========== " + msg + " ===========\n");
     }
 
     public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        Loja loja;
+
+        /* Tela de Login */
+        titulo("LOGIN");
+        System.out.print("Insira o seu email: ");
+        String emailLogin = entrada.nextLine();
+        System.out.print("Digite a sua senha: ");
+        String senhaLogin = entrada.nextLine();
+
+        ArrayList<String> a1 = new ArrayList<>();
+
+        // Verificando se as credenciais estão cadastradas no sistema
+        /* ArrayList<Usuario> usuariosCadastrados = loja.getUsersCadastrados();
+        for (Usuario usuario : usuariosCadastrados) {
+            usuario.
+        } */
+        
+
 
     }
+
 }

@@ -1,11 +1,10 @@
 package com.classes;
-import java.util.ArrayList;
 
 public class FuncionarioLoja extends Usuario {
 
     private String funcao;
 
-    public FuncionarioLoja(String novoNome, int novoId, String novoEndereco, ArrayList<String> novoTel, ArrayList<String> novoEmail, String novaSenha, String novaFuncao) {
+    public FuncionarioLoja(String novoNome, int novoId, String novoEndereco, String novoTel, String novoEmail, String novaSenha, String novaFuncao) {
         super(novoNome, novoId, novoEndereco, novoTel, novoEmail, novaSenha);
         this.funcao = novaFuncao;
     }
