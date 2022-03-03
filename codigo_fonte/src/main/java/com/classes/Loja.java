@@ -77,12 +77,33 @@ public class Loja {
         this.userCadastrados = userCadastrados;
     }
 
+    public Usuario getUsuario(String email) {
+        for (Usuario usuario : this.userCadastrados) {
+            if (usuario.getEmail().equals(email)) {
+                return usuario;
+            }
+        }
+
+        return null;
+    }
+
     public ArrayList<FuncionarioLoja> getFuncionarios() {
         return this.funcionarios;
     }
+    
 
     public void setFuncionarios(ArrayList<FuncionarioLoja> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public FuncionarioLoja getFuncionario(String email) {
+        for (FuncionarioLoja funcionario : this.funcionarios) {
+            if (funcionario.getEmail().equals(email)) {
+                return funcionario;
+            }
+        }
+
+        return null;
     }
 
     public ArrayList<Aluguel> getAlugueis() {
