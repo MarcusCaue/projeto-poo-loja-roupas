@@ -89,7 +89,9 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
-        Loja loja;
+
+        // Inserindo alguns dados na Loja (oriundo de arquivos)
+        Loja loja = new Loja();
 
         /* Tela de Login */
         titulo("LOGIN");
@@ -98,13 +100,17 @@ public class Main {
         System.out.print("Digite a sua senha: ");
         String senhaLogin = entrada.nextLine();
 
-        ArrayList<String> a1 = new ArrayList<>();
-
         // Verificando se as credenciais estão cadastradas no sistema
-        /* ArrayList<Usuario> usuariosCadastrados = loja.getUsersCadastrados();
+        // Caso seja um usuário simples
+        ArrayList<Usuario> usuariosCadastrados = loja.getUserCadastrados();
         for (Usuario usuario : usuariosCadastrados) {
-            usuario.
-        } */
+            String emailCadastrado = usuario.getEmail();
+            String senhaCadastrada = usuario.getSenha();
+
+            if (emailLogin.equals(emailCadastrado) && senhaLogin.equals(senhaCadastrada)) {
+                System.out.println("\nSeja muito bem-vindo!");
+            }
+        }
         
 
 

@@ -14,7 +14,7 @@ public class Loja {
     ArrayList<FuncionarioLoja> funcionarios;
     ArrayList<Aluguel> alugueis;
 
-    // Construtor
+    // Construtores
     public Loja(String novoNome, String novoEndereco, String novoTel, String novoEmail, ArrayList<Roupa> novasRoupas, ArrayList<Usuario> novosUserCadastrados, ArrayList<FuncionarioLoja> novosFuncionarios, ArrayList<Aluguel> novosAlugueis) {
         this.nome = novoNome;
         this.endereco = novoEndereco;
@@ -25,6 +25,8 @@ public class Loja {
         this.funcionarios = novosFuncionarios;
         this.alugueis = novosAlugueis;
     }
+
+    public Loja() { }
 
     // Getters e Setters
     public String getNome() {
