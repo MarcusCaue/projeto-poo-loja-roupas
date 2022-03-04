@@ -4,8 +4,6 @@ import com.classes.*;
 import com.classes.roupas.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
 
 public class Main {
 
@@ -145,12 +143,35 @@ public class Main {
         } */
         
         // Fazendo o cadastro de uma roupa
-        titulo("CADASTRO DE ROUPA");
+        /* titulo("CADASTRO DE ROUPA");
         loja.cadastrarRoupa(loja.getFuncionario("caue@gerencia.com.br").getFuncao());
         titulo("CADASTRO DE ROUPA");
         loja.cadastrarRoupa(loja.getFuncionario("pri@gerencia.com.br").getFuncao());
         titulo("CADASTRO DE ROUPA");
-        loja.cadastrarRoupa(loja.getFuncionario("paula@gerencia.com.br").getFuncao());
+        loja.cadastrarRoupa(loja.getFuncionario("paula@gerencia.com.br").getFuncao()); */
+
+        // Alugando uma roupa
+       /*  loja.alugar();
+        loja.alugar();
+        loja.alugar(); */
+
+        // Removendo um Usuário
+        /* titulo("Removendo Usuário");
+        loja.removerUsuario(0);
+        titulo("Removendo Usuário");
+        loja.removerUsuario(-2);
+
+        // Removendo um Funcionário
+        titulo("Removendo Funcionário");
+        loja.removerFuncionario(0);
+        titulo("Removendo Funcionário");
+        loja.removerFuncionario(10);
+
+        // Removendo uma Roupa 
+        titulo("Removendo Roupa");
+        loja.removerRoupa(0);
+        titulo("Removendo Roupa");
+        loja.removerRoupa(12); */
 
         titulo("Muito obrigado e volte sempre!");
 

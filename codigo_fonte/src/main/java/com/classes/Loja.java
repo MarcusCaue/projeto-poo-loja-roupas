@@ -178,8 +178,8 @@ public class Loja {
 	}
 
     public boolean verificarUsuario(int idUser){
-        for(int i = 0; i < usuariosCadastrados.size(); i++){
-            if (usuariosCadastrados.get(i).getId() == idUser){
+        for(int i = 0; i < this.usuariosCadastrados.size(); i++){
+            if (this.usuariosCadastrados.get(i).getId() == idUser){
                 return true;
             }
         }
@@ -187,8 +187,8 @@ public class Loja {
     }
 
     public boolean verificarRoupa(int idRoupa){
-        for(int i = 0; i < roupas.size(); i++){
-            if(roupas.get(i).getId() == idRoupa){
+        for(int i = 0; i < this.roupas.size(); i++){
+            if(this.roupas.get(i).getId() == idRoupa){
                 return true;
             }
         }
@@ -196,8 +196,8 @@ public class Loja {
     }
 
     public boolean verificaFuncionario(int idFunc){
-        for(int i = 0; i < funcionarios.size(); i++){
-            if(funcionarios.get(i).getId() == idFunc){
+        for(int i = 0; i < this.funcionarios.size(); i++){
+            if(this.funcionarios.get(i).getId() == idFunc){
                 return true;
             }
         }
@@ -218,9 +218,9 @@ public class Loja {
             return false;
         }
         else{
-            for(int i = 0; i < usuariosCadastrados.size(); i++) {
-                if(usuariosCadastrados.get(i).getId() == idUser){
-                    usuariosCadastrados.remove(i);
+            for(int i = 0; i < this.usuariosCadastrados.size(); i++) {
+                if(this.usuariosCadastrados.get(i).getId() == idUser){
+                    this.usuariosCadastrados.remove(i);
                 }
             }
             return true;
@@ -232,9 +232,9 @@ public class Loja {
             return false;
         }
         else{
-            for(int i = 0; i < funcionarios.size(); i++) {
-                if(funcionarios.get(i).getId() == idFunc){
-                    funcionarios.remove(i);
+            for(int i = 0; i < this.funcionarios.size(); i++) {
+                if(this.funcionarios.get(i).getId() == idFunc){
+                    this.funcionarios.remove(i);
                 }
             }
             return true;
@@ -246,9 +246,9 @@ public class Loja {
             return false;
         }
         else{
-            for(int i = 0; i < roupas.size(); i++){
-                if(roupas.get(i).getId() == idRoupa){
-                    roupas.remove(i);
+            for(int i = 0; i < this.roupas.size(); i++){
+                if(this.roupas.get(i).getId() == idRoupa){
+                    this.roupas.remove(i);
                 }
             }
         }
@@ -256,8 +256,6 @@ public class Loja {
     }
 
     public boolean alugar() {
-        
-        // Verificar se quem está alugando é um funcionário da loja ou um usuário comum;
         Scanner entrada = new Scanner(System.in);
 
         // Obtendo o usuário alugador
