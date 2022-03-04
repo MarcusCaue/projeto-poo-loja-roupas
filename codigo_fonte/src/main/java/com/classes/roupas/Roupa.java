@@ -2,14 +2,14 @@ package com.classes.roupas;
 
 public abstract class Roupa {
     private int id;
-    private String name;
+    private String nome;
     private String cor;
     private boolean disponibilidade;
     private double precoInicial;
 
-    protected Roupa(int id, String name, String cor, boolean disponibilidade, double precoInicial) {
+    protected Roupa(int id, String nome, String cor, boolean disponibilidade, double precoInicial) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.cor = cor;
         this.disponibilidade = disponibilidade;
         this.precoInicial = precoInicial;
@@ -19,8 +19,8 @@ public abstract class Roupa {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     public String getCor() {
@@ -39,8 +39,8 @@ public abstract class Roupa {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setCor(String cor) {
@@ -57,7 +57,7 @@ public abstract class Roupa {
 
     @Override
     public String toString() {
-        return "Roupa [cor=" + cor + ", disponibilidade=" + disponibilidade + ", id=" + id + ", name=" + name
+        return "Roupa [cor=" + cor + ", disponibilidade=" + disponibilidade + ", id=" + id + ", nome=" + nome
                 + ", precoInicial=" + precoInicial + "]";
     }
 

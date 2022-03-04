@@ -14,41 +14,16 @@ public class Main {
         System.out.println("\n=========== " + msg + " ===========\n");
     }
 
-    // Método que vai checar se o email informado faz parte da lista de emails aceitos pela loja
-    public static boolean checaEmail(String email) {
-
-		String dominio = "";
-
-		// Verificando se existe um @ no email informado
-		if (email.indexOf("@") == -1) {
-			return false;
-		}
-
-		// Obtendo o domínio
-		dominio = email.substring(email.indexOf("@"));
-
-		// Lista de domínios aceitos
-		ArrayList<String> listaDominios = new ArrayList<>();
-		listaDominios.add("@gmail.com");
-		listaDominios.add("@hotmail.com");
-		listaDominios.add("@outlook.com");
-		listaDominios.add("@gerencia.com.br");
-
-		// Verificando se o email informado contém um domínio válido
-		if (listaDominios.contains(dominio))
-			return true;
-
-		return false;
-	}
-
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-        // Inserindo alguns dados na Loja
+        /* Inserindo alguns dados na Loja
+         * As chaves foram colocadas para que essas varíaveis sejam apagadas, uma vez que elas só servem para armazenarem dados que serão enviadas ao construtor da Loja.
+         * Logo, elas não precisam estar ocupando espaço no programa principal.
+        */
+
         Loja loja;
 
-        // As chaves foram colocadas para que essas varíaveis sejam apagadas, uma vez que elas só servem para armazenarem dados que serão enviadas ao construtor da Loja.
-        // Logo, elas não precisam estar ocupando espaço no programa principal.
         {
             String nome = "Mirna's Fashion Look©";
             String rua = "Rua das Roupas Mais Lindas do Mundo, nº 85";
@@ -85,13 +60,13 @@ public class Main {
             usuarios.add(u3);
 
             ArrayList<FuncionarioLoja> funcionarios = new ArrayList<FuncionarioLoja>();
-            FuncionarioLoja f1 = new FuncionarioLoja("Marcus Cauê", funcionarios.size(), "Rua Pref. Leonardo, 88", "99404-6892", "caue@gerencia.com.br", "1234", "Desenvolvedor");
+            FuncionarioLoja f1 = new FuncionarioLoja("Marcus Cauê", funcionarios.size(), "Rua Pref. Leonardo, 88", "99404-6892", "caue@gerencia.com.br", "1234", "Gerente");
             funcionarios.add(f1);
 
             FuncionarioLoja f2 = new FuncionarioLoja("Paula Miranda Barbosa", funcionarios.size(), "Rua Pref. Leonardo, 88", "99404-6892", "paula@gerencia.com.br", "1234", "Desenvolvedora");
             funcionarios.add(f2);
 
-            FuncionarioLoja f3 = new FuncionarioLoja("Priscila Mayumi", funcionarios.size(), "Rua Pref. Leonardo, 88", "99404-6892", "pri@gerencia.com.br", "1234", "Arquiteta de Software");
+            FuncionarioLoja f3 = new FuncionarioLoja("Priscila Mayumi", funcionarios.size(), "Rua Pref. Leonardo, 88", "99404-6892", "pri@gerencia.com.br", "1234", "Gerente");
             funcionarios.add(f3);
 
             ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
@@ -103,7 +78,7 @@ public class Main {
 
         /* Tela de Login */
         // Variável que faz com que o usuário do sistema fique na tela de login até informar as credenciais que estejam cadastradas no sistema ou desista de tentar logar no mesmo.
-        char option = 'S'; 
+        /* char option = 'S'; 
         while (option == 'S') {
             titulo("LOGIN");
             System.out.print("Insira o seu email: ");
@@ -112,7 +87,7 @@ public class Main {
             String senhaLogin = entrada.nextLine();
     
             // Caso em que o email é inválido
-            if (checaEmail(emailLogin) ==  false) {
+            if (loja.checaEmail(emailLogin) ==  false) {
                 System.out.println("Talvez você tenha informado um email inválido");
             } 
             // Verifica se existe um funcionário cadastrado com esse email
@@ -157,9 +132,26 @@ public class Main {
 
             System.out.print("Quer tentar novamente? ");
             option = entrada.nextLine().toUpperCase().charAt(0);
+        } */
 
-        }
+        /* // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+        if (option == 'N') {
+            System.out.print("Deseja se cadastrar no sistema? ");
+            option = entrada.nextLine().toUpperCase().charAt(0);
+            if (option == 'S') {
+                titulo("CADASTRO");
+                loja.cadastrar();
+            }
+        } */
         
+        // Fazendo o cadastro de uma roupa
+        titulo("CADASTRO DE ROUPA");
+        loja.cadastrarRoupa(loja.getFuncionario("caue@gerencia.com.br").getFuncao());
+        titulo("CADASTRO DE ROUPA");
+        loja.cadastrarRoupa(loja.getFuncionario("pri@gerencia.com.br").getFuncao());
+        titulo("CADASTRO DE ROUPA");
+        loja.cadastrarRoupa(loja.getFuncionario("paula@gerencia.com.br").getFuncao());
+
         titulo("Muito obrigado e volte sempre!");
 
     }
