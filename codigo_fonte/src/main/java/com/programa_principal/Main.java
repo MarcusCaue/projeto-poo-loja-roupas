@@ -130,9 +130,9 @@ public class Main {
 
             System.out.print("Quer tentar novamente? ");
             option = entrada.nextLine().toUpperCase().charAt(0);
-        } */
+        }
 
-        /* // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+        // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
         if (option == 'N') {
             System.out.print("Deseja se cadastrar no sistema? ");
             option = entrada.nextLine().toUpperCase().charAt(0);
@@ -141,7 +141,7 @@ public class Main {
                 loja.cadastrar();
             }
         } */
-        
+    
         // Fazendo o cadastro de uma roupa
         /* titulo("CADASTRO DE ROUPA");
         loja.cadastrarRoupa(loja.getFuncionario("caue@gerencia.com.br").getFuncao());
@@ -151,7 +151,7 @@ public class Main {
         loja.cadastrarRoupa(loja.getFuncionario("paula@gerencia.com.br").getFuncao()); */
 
         // Alugando uma roupa
-       /*  loja.alugar();
+        /* loja.alugar();
         loja.alugar();
         loja.alugar(); */
 
@@ -171,8 +171,8 @@ public class Main {
         titulo("Removendo Roupa");
         loja.removerRoupa(0);
         titulo("Removendo Roupa");
-        loja.removerRoupa(12); */
-
+        loja.removerRoupa(12);
+        */
         titulo("Muito obrigado e volte sempre!");
 
     }
