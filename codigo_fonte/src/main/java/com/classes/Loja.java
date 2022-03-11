@@ -124,13 +124,6 @@ public class Loja {
     public boolean cadastrarRoupa(String funcaoFuncionario) {
 		Scanner sc = new Scanner(System.in);
 
-		if(funcaoFuncionario.toLowerCase().equals("gerente")) {
-			System.out.println("Você pode realizar o cadastro de roupas!"); 
-		} else {
-			System.out.println("Por não ser um gerente, você não pode fazer o cadastro de roupas.");
-			return false;
-		}
-
 		System.out.print("Digite o nome da roupa: ");
 		String nome = sc.nextLine();
 		
@@ -255,18 +248,11 @@ public class Loja {
         return true;
     }
 
-    public boolean alugar() {
+    public boolean alugar(Usuario user_func) {
         Scanner entrada = new Scanner(System.in);
-
-        // Obtendo o usuário alugador
-        System.out.print("Informe o ID do usuário que está alugando: ");
-        int idUser = entrada.nextInt();
         
-        while (idUser != -1 && verificarUsuario(idUser) == false) {
-            System.out.println("ID inválido. Talvez o usuário com esse ID não esteja cadastrado no sistema");
-            System.out.print("Informe um outro ID.\nCaso queira encerrar o aluguel, digite '-1': ");
-            idUser = entrada.nextInt();
-        }
+        // Obtendo o id do usuário alugador
+        int idUser = user_func.getId();
 
         if (idUser == -1) {
             return false;
@@ -274,10 +260,19 @@ public class Loja {
             Usuario alugador = this.getUserCadastrados().get(idUser);
 
             // Obtendo a roupa a ser alugada
+            char escolha;
+            System.out.print("Você deseja ver a lista de Roupas cadastradas?");
+            escolha = entrada.nextLine().toUpperCase().charAt(0);
+
+            if (escolha == 'S') {
+                System.out.println("\n=========== " + "ROUPAS" + " ===========\n");
+                exibirRoupas();
+            }
+
             System.out.print("\nInforme o ID da roupa a ser alugada: ");
             int idRoupa = entrada.nextInt();
             
-            while (idRoupa != -1 && verificarRoupa(idRoupa) == false) {
+            while (idRoupa != -1 || verificarRoupa(idRoupa) == false) {
                 System.out.println("ID inválido. Talvez essa roupa com esse ID não esteja cadastrada no sistema.");
                 System.out.print("Informe um outro ID.\nCaso queira encerrar o aluguel, digite '-1': ");
                 idRoupa = entrada.nextInt();
@@ -343,13 +338,17 @@ public class Loja {
 
     public void exibirUsuarios(){
         for(int i = 0;i < usuariosCadastrados.size();i++){
-            System.out.println(usuariosCadastrados.get(i).getNome());
+            System.out.println("Nome: " + usuariosCadastrados.get(i).getNome());
+            System.out.println("Id: " + usuariosCadastrados.get(i).getId());
+            System.out.println();
         }
     }
     
     public void exibirFuncionarios(){
         for(int i = 0;i < funcionarios.size();i++){
-            System.out.println(funcionarios.get(i).getNome());
+            System.out.println("Nome: " + funcionarios.get(i).getNome());
+            System.out.println("Id: " + funcionarios.get(i).getId());
+            System.out.println();
         }
     }
 
@@ -368,7 +367,9 @@ public class Loja {
 
     public void exibirRoupas() {
 		for(int i = 0;i < roupas.size();i++){
-            System.out.println(roupas.get(i).getNome());
+            System.out.println("Nome: " + roupas.get(i).getNome());
+            System.out.println("Id: " + roupas.get(i).getId());
+            System.out.println();
         }
 	}
 

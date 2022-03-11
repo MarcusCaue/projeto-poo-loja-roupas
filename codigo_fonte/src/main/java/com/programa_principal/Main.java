@@ -12,6 +12,88 @@ public class Main {
         System.out.println("\n=========== " + msg + " ===========\n");
     }
 
+    public static void menuFuncionario(Loja loja){
+        titulo("Menu de Funcionários");
+        System.out.println("1 - Remoção de usuário ou funcionário\n2 - Remover roupa");
+        System.out.print("\nDigite a opção que você deseja: ");
+        
+        Scanner escaneador = new Scanner(System.in);
+        int opcao = escaneador.nextInt(); escaneador.nextLine();
+        
+        char escolha;
+        if (opcao == 1) {
+            System.out.print("Você deseja ver a lista de Funcionários e de Usuários? ['S'/'N'] ");
+            escolha = escaneador.nextLine().toUpperCase().charAt(0);
+
+            if (escolha == 'S') {
+                titulo("FUNCIONARIOS");
+                loja.exibirFuncionarios();
+
+                titulo("USUARIOS");
+                loja.exibirUsuarios();
+            }
+
+            System.out.print("Você quer remover um funcionário ['F'] ou um usuário ['U']? ");
+            escolha = escaneador.nextLine().toUpperCase().charAt(0);
+
+            System.out.print("\nDigite o ID da pessoa que você deseja remover: ");
+            int id = escaneador.nextInt();
+
+            if (escolha == 'F') {
+                if (loja.verificaFuncionario(id)) {
+                    loja.removerFuncionario(id);
+                    System.out.println("Funcionário removido com sucesso!");
+                } else {
+                    System.out.println("Esse funcionário não está cadastrado no sistema.");
+                }
+            } else {
+                if(loja.verificarUsuario(id)){
+                    loja.removerUsuario(id);
+                    System.out.println("Usuário removido com sucesso!");
+                } else {
+                    System.out.println("Esse usuário não está cadastrado no sistema.");
+                }
+            }
+        } else {
+            System.out.print("Você deseja ver a lista de Roupas? ");
+            escolha = escaneador.nextLine().toUpperCase().charAt(0);
+
+            if (escolha == 'S') {
+                titulo("ROUPAS");
+                loja.exibirRoupas();
+            }
+
+            System.out.print("Digite o ID da roupa que você deseja remover: ");
+            int idRoupa = escaneador.nextInt();
+
+            if (loja.verificarRoupa(idRoupa)) {
+                loja.removerRoupa(idRoupa);
+                System.out.println("Roupa removida com sucesso!");
+            } else {
+                System.out.println("Essa roupa não está cadastrada no sistema.");
+            }
+        }
+    }
+
+    public static void menuUsuario(Loja loja, Usuario user){
+        titulo("Menu de Usuários");
+        System.out.println("1 - Aluguel de uma Roupa");
+        System.out.print("\nDigite a opção que você deseja: ");
+
+        Scanner escaneador = new Scanner(System.in);
+        int opcao = escaneador.nextInt();
+
+        if(opcao == 1){
+            titulo("ALUGUEL DE ROUPA");
+            if (loja.alugar(user)) {
+                System.out.println("Aluguel realizado com sucesso!");
+            } else {
+                System.out.println("Aluguel cancelado!");
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
@@ -72,11 +154,11 @@ public class Main {
             loja = new Loja(nome, rua, tel, email, roupas, usuarios, funcionarios, alugueis);
         }
 
-        Usuario usuarioLogado; FuncionarioLoja funcionarioLogado;
+        Usuario usuarioLogado = null; FuncionarioLoja funcionarioLogado = null;
 
         /* Tela de Login */
         // Variável que faz com que o usuário do sistema fique na tela de login até informar as credenciais que estejam cadastradas no sistema ou desista de tentar logar no mesmo.
-        /* char option = 'S'; 
+        char option = 'S'; 
         while (option == 'S') {
             titulo("LOGIN");
             System.out.print("Insira o seu email: ");
@@ -132,6 +214,12 @@ public class Main {
             option = entrada.nextLine().toUpperCase().charAt(0);
         }
 
+        if (funcionarioLogado != null) {
+            menuFuncionario(loja);
+        } else if (usuarioLogado != null) {
+            menuUsuario(loja, usuarioLogado);
+        }
+
         // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
         if (option == 'N') {
             System.out.print("Deseja se cadastrar no sistema? ");
@@ -140,7 +228,7 @@ public class Main {
                 titulo("CADASTRO");
                 loja.cadastrar();
             }
-        } */
+        }
     
         // Fazendo o cadastro de uma roupa
         /* titulo("CADASTRO DE ROUPA");
