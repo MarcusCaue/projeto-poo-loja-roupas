@@ -111,14 +111,11 @@ public class Loja {
 
             FuncionarioLoja funcionario = new FuncionarioLoja(username, this.funcionarios.size(), endereco, tel, email, senha, funcao);
             this.funcionarios.add(funcionario);
-
         } else {
             Usuario user = new Usuario(username, this.usuariosCadastrados.size() , endereco, tel, email, senha);
             this.usuariosCadastrados.add(user);
         }
-		
-        sc.close();
-
+	
         return true;
 	}
     
@@ -174,6 +171,10 @@ public class Loja {
 	}
 
     public boolean verificarUsuario(int idUser){
+        if (idUser > this.usuariosCadastrados.size()) {
+            return false;
+        }
+
         for(int i = 0; i < this.usuariosCadastrados.size(); i++){
             if (this.usuariosCadastrados.get(i).getId() == idUser){
                 return true;
@@ -183,15 +184,24 @@ public class Loja {
     }
 
     public boolean verificarRoupa(int idRoupa){
+        if (idRoupa > this.roupas.size()) {
+            return false;
+        }
+
         for(int i = 0; i < this.roupas.size(); i++){
             if(this.roupas.get(i).getId() == idRoupa){
                 return true;
             }
         }
+
         return false;
     }
 
-    public boolean verificaFuncionario(int idFunc){
+    public boolean verificarFuncionario(int idFunc){
+        if (idFunc > this.funcionarios.size()) {
+            return false;
+        }
+
         for(int i = 0; i < this.funcionarios.size(); i++){
             if(this.funcionarios.get(i).getId() == idFunc){
                 return true;
@@ -201,6 +211,10 @@ public class Loja {
     }
 
     public boolean verificarAluguel(int idAluguel) {
+        if (idAluguel > this.alugueis.size()) {
+            return false;
+        }
+
 		for(int i = 0; i < this.alugueis.size(); i++) {
 			if(this.alugueis.get(i).getId() == idAluguel) {
                 return true;
@@ -224,7 +238,7 @@ public class Loja {
     }
 
     public boolean removerFuncionario(int idFunc) {
-        if (verificaFuncionario(idFunc) == false){
+        if (verificarFuncionario(idFunc) == false){
             return false;
         }
         else{
@@ -261,7 +275,7 @@ public class Loja {
 
         // Obtendo a roupa a ser alugada
         char escolha;
-        System.out.print("Você deseja ver a lista de Roupas cadastradas?");
+        System.out.print("Você deseja ver a lista de Roupas cadastradas? ['S'/'N'] ");
         escolha = entrada.nextLine().toUpperCase().charAt(0);
 
         if (escolha == 'S') {
@@ -270,16 +284,15 @@ public class Loja {
         }
 
         System.out.print("\nInforme o ID da roupa a ser alugada: ");
-        int idRoupa = entrada.nextInt();
+        int idRoupa = entrada.nextInt(); entrada.nextLine();
         
-        while (idRoupa != -1 || verificarRoupa(idRoupa) == false) {
+        while (idRoupa != -1 && verificarRoupa(idRoupa) == false) {
             System.out.println("ID inválido. Talvez essa roupa com esse ID não esteja cadastrada no sistema.");
             System.out.print("Informe um outro ID.\nCaso queira encerrar o aluguel, digite '-1': ");
-            idRoupa = entrada.nextInt();
+            idRoupa = entrada.nextInt(); entrada.nextLine();
         }
 
         if (idRoupa == -1) {
-            entrada.close();
             return false;
         } else {
             Roupa roupaAlugada = this.getRoupas().get(idRoupa);
@@ -289,13 +302,12 @@ public class Loja {
                 roupaAlugada.setDisponibilidade(false);
             } else {
                 System.out.println("Essa roupa já está alugada!");
-                entrada.close();
                 return false;
             }
 
             // Obtendo a quantidade de semanas que o usuário deseja alugar a roupa
             System.out.print("\nPor quantas semanas você quer alugar a roupa? (R$ 15.00 por semana): ");
-            int quantSemanas = entrada.nextInt();
+            int quantSemanas = entrada.nextInt(); entrada.nextLine();
 
             // Preço do Aluguel
             double precoAluguel = roupaAlugada.getPrecoInicial() + (15 * quantSemanas);
@@ -321,11 +333,9 @@ public class Loja {
 
             alugueis.add(a1);
             
-            entrada.close();
             return true;
         }
     }
-
 
     public void devolverRoupa(Aluguel aluguel) {
         //Checando se a devolução foi feita no prazo
