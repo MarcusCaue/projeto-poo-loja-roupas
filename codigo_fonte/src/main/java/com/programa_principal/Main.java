@@ -73,6 +73,8 @@ public class Main {
                 System.out.println("Essa roupa não está cadastrada no sistema.");
             }
         }
+
+        escaneador.close();
     }
 
     public static void menuUsuario(Loja loja, Usuario user){
@@ -91,6 +93,8 @@ public class Main {
                 System.out.println("Aluguel cancelado!");
             }
         }
+
+        escaneador.close();
     }
 
 
@@ -160,6 +164,9 @@ public class Main {
         // Variável que faz com que o usuário do sistema fique na tela de login até informar as credenciais que estejam cadastradas no sistema ou desista de tentar logar no mesmo.
         char option = 'S'; 
         while (option == 'S') {
+            titulo("Bem-vindo à loja Mirna's Fashion Look!");
+            System.out.println();
+            
             titulo("LOGIN");
             System.out.print("Insira o seu email: ");
             String emailLogin = entrada.nextLine();
@@ -261,6 +268,8 @@ public class Main {
         titulo("Removendo Roupa");
         loja.removerRoupa(12);
         */
+        
+        entrada.close();
         titulo("Muito obrigado e volte sempre!");
 
     }

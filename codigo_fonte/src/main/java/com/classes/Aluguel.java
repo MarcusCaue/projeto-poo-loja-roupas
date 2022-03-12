@@ -76,8 +76,7 @@ public class Aluguel {
 	}
 
 	public String toString() {
-		return "Aluguel [id = " + id + ", Data de início = " + dataInicio + ", Data final = " + dataFim
-				+ ", Valor do aluguel = " + valorAluguel + ", alugador = " + alugador + "]";
+		return "Aluguel [id = " + id + ", Data de início = " + dataInicio + ", Data final = " + dataFim + ", Valor do aluguel = " + valorAluguel + ", alugador = " + alugador + "]";
 	}
 
 }

@@ -57,8 +57,7 @@ public abstract class Roupa {
 
     @Override
     public String toString() {
-        return "Roupa [cor=" + cor + ", disponibilidade=" + disponibilidade + ", id=" + id + ", nome=" + nome
-                + ", precoInicial=" + precoInicial + "]";
+        return "Roupa [cor=" + cor + ", disponibilidade=" + disponibilidade + ", id=" + id + ", nome=" + nome + ", precoInicial=" + precoInicial + "]";
     }
 
 }

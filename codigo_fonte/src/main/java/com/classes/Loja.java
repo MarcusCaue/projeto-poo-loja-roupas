@@ -63,7 +63,6 @@ public class Loja {
     
     public boolean cadastrar() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("======= Bem-vindo à loja Mirna's Fashion Look! =======");
 		System.out.println("Comece seu cadastro para poder alugar as roupas da nossa loja!\n");
 		
 		// Leitura do nome do usuário
@@ -118,10 +117,12 @@ public class Loja {
             this.usuariosCadastrados.add(user);
         }
 		
+        sc.close();
+
         return true;
 	}
     
-    public boolean cadastrarRoupa(String funcaoFuncionario) {
+    public boolean cadastrarRoupa() {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("Digite o nome da roupa: ");
@@ -166,6 +167,8 @@ public class Loja {
             Terno t1 = new Terno(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
             this.roupas.add(t1);
         }
+
+        sc.close();
 
         return true;
 	}
@@ -254,74 +257,90 @@ public class Loja {
         // Obtendo o id do usuário alugador
         int idUser = user_func.getId();
 
-        if (idUser == -1) {
+        Usuario alugador = this.getUserCadastrados().get(idUser);
+
+        // Obtendo a roupa a ser alugada
+        char escolha;
+        System.out.print("Você deseja ver a lista de Roupas cadastradas?");
+        escolha = entrada.nextLine().toUpperCase().charAt(0);
+
+        if (escolha == 'S') {
+            System.out.println("\n=========== " + "ROUPAS" + " ===========\n");
+            exibirRoupas();
+        }
+
+        System.out.print("\nInforme o ID da roupa a ser alugada: ");
+        int idRoupa = entrada.nextInt();
+        
+        while (idRoupa != -1 || verificarRoupa(idRoupa) == false) {
+            System.out.println("ID inválido. Talvez essa roupa com esse ID não esteja cadastrada no sistema.");
+            System.out.print("Informe um outro ID.\nCaso queira encerrar o aluguel, digite '-1': ");
+            idRoupa = entrada.nextInt();
+        }
+
+        if (idRoupa == -1) {
+            entrada.close();
             return false;
         } else {
-            Usuario alugador = this.getUserCadastrados().get(idUser);
+            Roupa roupaAlugada = this.getRoupas().get(idRoupa);
 
-            // Obtendo a roupa a ser alugada
-            char escolha;
-            System.out.print("Você deseja ver a lista de Roupas cadastradas?");
-            escolha = entrada.nextLine().toUpperCase().charAt(0);
-
-            if (escolha == 'S') {
-                System.out.println("\n=========== " + "ROUPAS" + " ===========\n");
-                exibirRoupas();
-            }
-
-            System.out.print("\nInforme o ID da roupa a ser alugada: ");
-            int idRoupa = entrada.nextInt();
-            
-            while (idRoupa != -1 || verificarRoupa(idRoupa) == false) {
-                System.out.println("ID inválido. Talvez essa roupa com esse ID não esteja cadastrada no sistema.");
-                System.out.print("Informe um outro ID.\nCaso queira encerrar o aluguel, digite '-1': ");
-                idRoupa = entrada.nextInt();
-            }
-
-            if (idRoupa == -1) {
-                return false;
+            if (roupaAlugada.getDisponibilidade() == true) {
+                // Tirando a disponibilidade da roupa
+                roupaAlugada.setDisponibilidade(false);
             } else {
-                Roupa roupaAlugada = this.getRoupas().get(idRoupa);
-
-                if (roupaAlugada.getDisponibilidade() == true) {
-                    // Tirando a disponibilidade da roupa
-                    roupaAlugada.setDisponibilidade(false);
-                } else {
-                    System.out.println("Essa roupa já está alugada!");
-                    return false;
-                }
-
-                // Obtendo a quantidade de semanas que o usuário deseja alugar a roupa
-                System.out.print("\nPor quantas semanas você quer alugar a roupa? (R$ 15.00 por semana): ");
-                int quantSemanas = entrada.nextInt();
-
-                // Preço do Aluguel
-                double precoAluguel = roupaAlugada.getPrecoInicial() + (15 * quantSemanas);
-
-                // Objetos para manipular a data e formatar a data no estilo dd/MM/yyyy
-                SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-                Calendar datas = Calendar.getInstance();
-
-                // Obtém a data do sistema no momento em que o usuário está executando o programa e o formata conforme o estilo citado acima
-                String dataInicioAluguel = formatador.format(datas.getTime());
-                
-                // Obtém a data do sistema no formato que a classe Calendar aceita
-                datas.setTime(datas.getTime());
-
-                // Manipulando a data para obter uma nova data acrescentando a quantidade de semanas informada pelo usuário
-                datas.add(Calendar.WEEK_OF_MONTH, quantSemanas);
-
-                // Formatando a data do fim do aluguel
-                String dataFimAluguel = formatador.format(datas.getTime());
-
-                // Criando o aluguel
-                Aluguel a1 = new Aluguel(this.getAlugueis().size(), dataInicioAluguel, dataFimAluguel, roupaAlugada, precoAluguel, alugador);
-
-                alugueis.add(a1);
-
-                return true;
+                System.out.println("Essa roupa já está alugada!");
+                entrada.close();
+                return false;
             }
+
+            // Obtendo a quantidade de semanas que o usuário deseja alugar a roupa
+            System.out.print("\nPor quantas semanas você quer alugar a roupa? (R$ 15.00 por semana): ");
+            int quantSemanas = entrada.nextInt();
+
+            // Preço do Aluguel
+            double precoAluguel = roupaAlugada.getPrecoInicial() + (15 * quantSemanas);
+
+            // Objetos para manipular a data e formatar a data no estilo dd/MM/yyyy
+            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            Calendar datas = Calendar.getInstance();
+
+            // Obtém a data do sistema no momento em que o usuário está executando o programa e o formata conforme o estilo citado acima
+            String dataInicioAluguel = formatador.format(datas.getTime());
+            
+            // Obtém a data do sistema no formato que a classe Calendar aceita
+            datas.setTime(datas.getTime());
+
+            // Manipulando a data para obter uma nova data acrescentando a quantidade de semanas informada pelo usuário
+            datas.add(Calendar.WEEK_OF_MONTH, quantSemanas);
+
+            // Formatando a data do fim do aluguel
+            String dataFimAluguel = formatador.format(datas.getTime());
+
+            // Criando o aluguel
+            Aluguel a1 = new Aluguel(this.getAlugueis().size(), dataInicioAluguel, dataFimAluguel, roupaAlugada, precoAluguel, alugador);
+
+            alugueis.add(a1);
+            
+            entrada.close();
+            return true;
         }
+    }
+
+
+    public void devolverRoupa(Aluguel aluguel) {
+        //Checando se a devolução foi feita no prazo
+        double multa = emitirMulta(aluguel.getDataFim());
+        
+        if (multa==0) {
+            System.out.println("Devolução concluída no prazo!\nMuito obrigado por alugar na nossa loja.");
+        } else {
+            System.out.println("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de " + multa);
+        }
+
+        // Mudando a disponibilidade da roupa devolvida
+        aluguel.getRoupa().setDisponibilidade(true);
+        // Removendo o aluguel da lista
+        this.alugueis.remove(aluguel);
     }
 
     public double emitirMulta(String dataFim) {
