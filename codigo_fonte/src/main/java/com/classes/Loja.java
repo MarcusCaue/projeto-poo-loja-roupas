@@ -265,11 +265,11 @@ public class Loja {
         return true;
     }
 
-    public boolean alugar(Usuario user_func) {
+    public boolean alugar(Usuario user) {
         Scanner entrada = new Scanner(System.in);
         
         // Obtendo o id do usuário alugador
-        int idUser = user_func.getId();
+        int idUser = user.getId();
 
         Usuario alugador = this.getUserCadastrados().get(idUser);
 

@@ -1,7 +1,3 @@
-Mudar no diagrama:
-    - O tipo de retorno do método devolverRoupa()
-    - Adicionar o parâmetro user_func em alugar()
-
 Falta Lipe mandar os menus dele.
 
 ## Testes Realizados:
