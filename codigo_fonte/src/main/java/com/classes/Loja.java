@@ -127,7 +127,7 @@ public class Loja {
 		
         ArrayList<String> tiposRoupa = new ArrayList<String>();
         tiposRoupa.add("vestido");
-        tiposRoupa.add("calça");
+        tiposRoupa.add("calca");
         tiposRoupa.add("bermuda/short");
         tiposRoupa.add("camisa");
         tiposRoupa.add("pajem");
@@ -135,7 +135,7 @@ public class Loja {
 
         String tipo = "";
         do {
-            System.out.print("Digite o tipo da roupa ['vestido', 'calça', 'camisa', 'bermuda/short', 'pajem', 'terno']: ");
+            System.out.print("Digite o tipo da roupa ['vestido', 'calca', 'camisa', 'bermuda/short', 'pajem', 'terno']: ");
             tipo = sc.nextLine();
         } while (tipo.equals("") || tiposRoupa.contains(tipo) == false);
 
@@ -148,7 +148,7 @@ public class Loja {
         if (tipo.equals("vestido")) {
             Vestido v1 = new Vestido(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
             this.roupas.add(v1);
-        } else if (tipo.equals("calça")) {
+        } else if (tipo.equals("calca")) {
             Calca c1 = new Calca(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
             this.roupas.add(c1);
         } else if (tipo.equals("bermuda/short")) {
@@ -164,8 +164,6 @@ public class Loja {
             Terno t1 = new Terno(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
             this.roupas.add(t1);
         }
-
-        sc.close();
 
         return true;
 	}
@@ -337,20 +335,28 @@ public class Loja {
         }
     }
 
-    public void devolverRoupa(Aluguel aluguel) {
-        //Checando se a devolução foi feita no prazo
-        double multa = emitirMulta(aluguel.getDataFim());
-        
-        if (multa==0) {
-            System.out.println("Devolução concluída no prazo!\nMuito obrigado por alugar na nossa loja.");
+    public void devolverRoupa(Aluguel aluguel, Usuario user_Devolve) {
+
+        if (aluguel.getAlugador().equals(user_Devolve)) {
+            //Checando se a devolução foi feita no prazo
+            double multa = emitirMulta(aluguel.getDataFim());
+                    
+            if (multa==0) {
+                System.out.println("Devolução concluída no prazo!\nMuito obrigado por alugar na nossa loja.");
+            } else {
+                System.out.println("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de " + multa);
+            }
+
+            // Mudando a disponibilidade da roupa devolvida
+            aluguel.getRoupa().setDisponibilidade(true);
+            // Removendo o aluguel da lista
+            this.alugueis.remove(aluguel);
+
         } else {
-            System.out.println("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de " + multa);
+            System.out.println("Você não é o usuário responsável pelo aluguel dessa roupa!");
+            System.out.println("Devolução cancelada!");
         }
 
-        // Mudando a disponibilidade da roupa devolvida
-        aluguel.getRoupa().setDisponibilidade(true);
-        // Removendo o aluguel da lista
-        this.alugueis.remove(aluguel);
     }
 
     public double emitirMulta(String dataFim) {
@@ -358,10 +364,16 @@ public class Loja {
 		int ano = Integer.parseInt(dataFim.substring(6));
 		int mes = Integer.parseInt(dataFim.substring(3, 5));
 		int dia = Integer.parseInt(dataFim.substring(0, 2));
+
 		LocalDate dataFinal = LocalDate.of(ano, mes, dia);
-		Period periodo = Period.between(dataFinal, dataAtual);
+		Period periodo = Period.between(dataAtual, dataFinal);
 		int qtdDias = periodo.getDays() + periodo.getMonths() * 30;
-		double multa = qtdDias * 1.50;
+        
+        double multa = 0;
+        if (qtdDias < 0) {
+            multa = (qtdDias * 1.50) * -1;
+        }
+
 		return multa;
 	}
 
@@ -398,6 +410,7 @@ public class Loja {
 		for(int i = 0;i < roupas.size();i++){
             System.out.println("Nome: " + roupas.get(i).getNome());
             System.out.println("Id: " + roupas.get(i).getId());
+            System.out.println("Disponibilidade: " + roupas.get(i).getDisponibilidade());
             System.out.println();
         }
 	}
