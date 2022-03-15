@@ -122,9 +122,12 @@ public class Loja {
     public boolean cadastrarRoupa() {
 		Scanner sc = new Scanner(System.in);
 
-		System.out.print("Digite o nome da roupa: ");
-		String nome = sc.nextLine();
-		
+        String nome = "";
+		do {
+			System.out.print("Digite o nome da roupa: ");
+			nome = sc.nextLine();
+		} while(nome.equals(""));
+
         ArrayList<String> tiposRoupa = new ArrayList<String>();
         tiposRoupa.add("vestido");
         tiposRoupa.add("calca");
@@ -139,10 +142,15 @@ public class Loja {
             tipo = sc.nextLine();
         } while (tipo.equals("") || tiposRoupa.contains(tipo) == false);
 
-        System.out.print("Digite a cor da roupa: ");
-		String cor = sc.nextLine();
+        String cor = "";
+        do {
+            System.out.print("Digite a cor da roupa: ");
+		    cor = sc.nextLine();
+        } while (cor.equals(""));
+
 		System.out.print("Digite o preço da da roupa: ");
 		double precoInicial = sc.nextDouble();
+        
 		boolean disponibilidade = true;
 
         if (tipo.equals("vestido")) {
@@ -169,7 +177,7 @@ public class Loja {
 	}
 
     public boolean verificarUsuario(int idUser){
-        if (idUser > this.usuariosCadastrados.size()) {
+        if (idUser < 0) {
             return false;
         }
 
@@ -182,7 +190,7 @@ public class Loja {
     }
 
     public boolean verificarRoupa(int idRoupa){
-        if (idRoupa > this.roupas.size()) {
+        if (idRoupa < 0) {
             return false;
         }
 
@@ -196,7 +204,7 @@ public class Loja {
     }
 
     public boolean verificarFuncionario(int idFunc){
-        if (idFunc > this.funcionarios.size()) {
+        if (idFunc < 0) {
             return false;
         }
 
@@ -209,7 +217,7 @@ public class Loja {
     }
 
     public boolean verificarAluguel(int idAluguel) {
-        if (idAluguel > this.alugueis.size()) {
+        if (idAluguel < 0) {
             return false;
         }
 

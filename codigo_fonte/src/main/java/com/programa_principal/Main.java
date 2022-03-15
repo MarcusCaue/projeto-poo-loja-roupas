@@ -205,22 +205,33 @@ public class Main {
             ArrayList<Roupa> roupas = new ArrayList<Roupa>();
             Pajem p1 = new Pajem(roupas.size(), "Pajem Masculino Tamanho P", "Branco", true, 27.00);
             roupas.add(p1);
-
             Pajem p2 = new Pajem(roupas.size(), "Pajem Masculino Tamanho M", "Preto", true, 27.00);
             roupas.add(p2);
 
-            Pajem p3 = new Pajem(roupas.size(), "Pajem Masculino Tamanho P", "Azul", true, 27.00);
-            roupas.add(p3);
-
             BermudaShort b1 = new BermudaShort(roupas.size(), "Short Jeans Tamanho 34", "Azul Escuro", true, 15.00);
             roupas.add(b1);
-
-            BermudaShort b2 = new BermudaShort(roupas.size(), "Bermuda Taktel Tamanho 36", "Vermelho Listrado", true,
-                    9.80);
+            BermudaShort b2 = new BermudaShort(roupas.size(), "Bermuda Taktel Tamanho 36", "Vermelho Listrado", true, 9.80);
             roupas.add(b2);
 
-            BermudaShort b3 = new BermudaShort(roupas.size(), "Bermuda Jeans Tamanho 30", "Preto", true, 17.00);
-            roupas.add(b3);
+            Vestido v1 = new Vestido(roupas.size(), "Vestido de Casamento", "Branco", true, 70.00);
+            roupas.add(v1);
+            Vestido v2 = new Vestido(roupas.size(), "Vestido de Festa de Quinze Anos", "Ciano", true, 45.00);
+            roupas.add(v2);
+
+            Camisa c1 = new Camisa(roupas.size(), "Camisa do Vasco Tamanho M, nº 10", "Preto e Branca", true, 20.00);
+            roupas.add(c1);
+            Camisa c2 = new Camisa(roupas.size(), "Camisa Social Manga Curta Tamanho G", "Vinho", true, 35.00);
+            roupas.add(c2);
+
+            Calca cc1 = new Calca(roupas.size(), "Calça Leg Feminina Tamanho P", "Amarelo Listrado", true, 15.00);
+            roupas.add(cc1);
+            Calca cc2 = new Calca(roupas.size(), "Calça Jeans Escura Tamanho GG", "Azul Escuro", true, 15.00);
+            roupas.add(cc2);
+
+            Terno t1 = new Terno(roupas.size(), "Terno de Casamento Tamanho 42", "Branco", true, 40.00);
+            roupas.add(t1);
+            Terno t2 = new Terno(roupas.size(), "Terno Profissional Tamanho 34", "Preto", true, 20.00);
+            roupas.add(t2);
 
             ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
             Usuario u1 = new Usuario("Jonas de Samos", usuarios.size(), "Rua dos Filósofos Brabos", "99345-6712",
@@ -245,7 +256,7 @@ public class Main {
             funcionarios.add(f2);
 
             FuncionarioLoja f3 = new FuncionarioLoja("Priscila Mayumi", funcionarios.size(), "Rua Pref. Leonardo, 88",
-                    "99404-6892", "pri@gerencia.com.br", "1234", "Gerente");
+                    "99404-6892", "pri@gerencia.com.br", "1234", "Secretária");
             funcionarios.add(f3);
 
             ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
