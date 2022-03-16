@@ -343,13 +343,22 @@ public class Loja {
         }
     }
 
-    public void devolverRoupa(Aluguel aluguel, Usuario user_Devolve) {
+    public void devolverRoupa(int idAluguel, Usuario user_Devolve) {
+
+        Aluguel aluguel = null;
+
+        for (int i = 0; i < this.alugueis.size(); i++) {
+            if (this.alugueis.get(i).getId() == idAluguel) {
+                aluguel = this.alugueis.get(i);
+            }
+        }
 
         if (aluguel.getAlugador().equals(user_Devolve)) {
+
             //Checando se a devolução foi feita no prazo
             double multa = emitirMulta(aluguel.getDataFim());
                     
-            if (multa==0) {
+            if (multa == 0) {
                 System.out.println("Devolução concluída no prazo!\nMuito obrigado por alugar na nossa loja.");
             } else {
                 System.out.println("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de " + multa);
@@ -415,8 +424,9 @@ public class Loja {
 	}
 
     public void exibirRoupas() {
-		for(int i = 0;i < roupas.size();i++){
+		for(int i = 0; i < roupas.size();i++){
             System.out.println("Nome: " + roupas.get(i).getNome());
+            System.out.printf("Preço: R$%.2f\n", roupas.get(i).getPrecoInicial());
             System.out.println("Id: " + roupas.get(i).getId());
             System.out.println("Disponibilidade: " + roupas.get(i).getDisponibilidade());
             System.out.println();

@@ -175,8 +175,7 @@ public class Main {
             if (decisao == 'N') {
                 System.out.println("Devolução cancelada!");
             } else {
-                Aluguel aluguel = loja.getAlugueis().get(idAluguel);
-                loja.devolverRoupa(aluguel, user);
+                loja.devolverRoupa(idAluguel, user);
             }
         }
 

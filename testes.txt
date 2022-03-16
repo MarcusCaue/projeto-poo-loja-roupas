@@ -36,6 +36,5 @@
 ## 7 - Teste de `Adição` de Aluguel (CONCLUÍDO!!!!)
     - Roupas já alugadas não podem ser alugadas novamente.
 
-## 8 - Teste de `Remoção` (devolução da roupa) de Aluguel
+## 8 - Teste de `Remoção` (devolução da roupa) de Aluguel (CONCLUÍDO!!!!)
     - Somente usuários que fizeram aluguéis podem devolver roupas e eles só podem devolver as roupas que alugaram (não interferem nos aluguéis feitos por outros usuários).
-    - FAZER ALTERAÇÕES NA FUNÇÃO DE DEVOLUÇÃO no menuUsuario().
