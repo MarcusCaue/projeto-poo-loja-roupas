@@ -1,7 +1,7 @@
 /** ## Regra de Negócio
  * 
- * O valor de cada aluguel será: (preçoRoupa + (15.00 * quantidade de semanas))
- * 
+ * O valor de cada aluguel será: (preçoRoupa + (R$15,00 * quantidade de semanas))
+ * Caso o usuário devolva uma roupa em uma data que ultrapasse "dataFim", o mesmo receberá uma multa que vale (R$1,50 * quantidade de dias atrasados)
 */
 
 package com.classes;
@@ -16,6 +16,7 @@ public class Aluguel {
 	private double valorAluguel;
 	private Usuario alugador;
 
+	// Ent -> "Entrada"
 	public Aluguel(int idEnt, String dataInicioEnt, String dataFimEnt, Roupa roupaEnt, double valorAluguelEnt, Usuario alugadorEnt) {
 
 		this.id = idEnt;
