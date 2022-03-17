@@ -244,7 +244,7 @@ public class Loja {
             exibirRoupas();
         }
 
-        System.out.print("\nInforme o ID da roupa a ser alugada: ");
+        System.out.print("Informe o ID da roupa a ser alugada: ");
         int idRoupa = entrada.nextInt(); entrada.nextLine();
         
         while (idRoupa != -1 && verificarRoupa(idRoupa) == false) {
@@ -362,6 +362,7 @@ public class Loja {
             System.out.println("Nome: " + funcionarios.get(i).getNome());
             System.out.println("Id: " + funcionarios.get(i).getId());
             System.out.println("Função: " + funcionarios.get(i).getFuncao());
+            System.out.println();
         }
     }
 
