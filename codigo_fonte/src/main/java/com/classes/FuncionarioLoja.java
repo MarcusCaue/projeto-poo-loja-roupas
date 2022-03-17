@@ -4,8 +4,8 @@ public class FuncionarioLoja extends Usuario {
 
     private String funcao;
 
-    public FuncionarioLoja(String novoNome, int novoId, String novoEndereco, String novoTel, String novoEmail, String novaSenha, String novaFuncao) {
-        super(novoNome, novoId, novoEndereco, novoTel, novoEmail, novaSenha);
+    public FuncionarioLoja(String novoNome, int novoId, String novoEmail, String novaSenha, String novaFuncao) {
+        super(novoNome, novoId, novoEmail, novaSenha);
         this.funcao = novaFuncao;
     }
 

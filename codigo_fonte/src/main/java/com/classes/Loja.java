@@ -11,8 +11,6 @@ import java.time.Period;
 public class Loja {
     // Atributos
     private String nome;
-    private String endereco;
-    private String tel;
     private String email;
     private ArrayList<Roupa> roupas;
     private ArrayList<Usuario> usuariosCadastrados;
@@ -20,10 +18,8 @@ public class Loja {
     private ArrayList<Aluguel> alugueis;
 
     // Construtor
-    public Loja(String novoNome, String novoEndereco, String novoTel, String novoEmail, ArrayList<Roupa> novasRoupas, ArrayList<Usuario> novosUserCadastrados, ArrayList<FuncionarioLoja> novosFuncionarios, ArrayList<Aluguel> novosAlugueis) {
+    public Loja(String novoNome, String novoEmail, ArrayList<Roupa> novasRoupas, ArrayList<Usuario> novosUserCadastrados, ArrayList<FuncionarioLoja> novosFuncionarios, ArrayList<Aluguel> novosAlugueis) {
         this.nome = novoNome;
-        this.endereco = novoEndereco;
-        this.tel = novoTel;
         this.email = novoEmail;
         this.roupas = novasRoupas;
         this.usuariosCadastrados = novosUserCadastrados;
@@ -71,20 +67,6 @@ public class Loja {
 			System.out.print("Digite o seu nome completo: ");
 			username = sc.nextLine();
 		} while (username.equals(""));
-
-		// Leitura do endereço
-		String endereco = "";
-		do {
-			System.out.print("Digite o seu endereço: ");
-			endereco = sc.nextLine();
-		} while (endereco.equals(""));
-
-		// Leitura do telefone
-        String tel = "";
-        do {
-            System.out.print("Digite o número de seu telefone: ");
-            tel = sc.nextLine();
-        } while (tel.equals(""));
 	
 		// Leitura do email
         String email = "";
@@ -109,10 +91,10 @@ public class Loja {
                 funcao = sc.nextLine();
             } while (funcao.equals(""));
 
-            FuncionarioLoja funcionario = new FuncionarioLoja(username, this.funcionarios.size(), endereco, tel, email, senha, funcao);
+            FuncionarioLoja funcionario = new FuncionarioLoja(username, this.funcionarios.size(), email, senha, funcao);
             this.funcionarios.add(funcionario);
         } else {
-            Usuario user = new Usuario(username, this.usuariosCadastrados.size() , endereco, tel, email, senha);
+            Usuario user = new Usuario(username, this.usuariosCadastrados.size(), email, senha);
             this.usuariosCadastrados.add(user);
         }
 	
@@ -334,6 +316,8 @@ public class Loja {
             // Formatando a data do fim do aluguel
             String dataFimAluguel = formatador.format(datas.getTime());
 
+            // Mostrando o preço do aluguel
+            System.out.printf("Preço final do aluguel: R$%,.2f\n", precoAluguel);
             // Criando o aluguel
             Aluguel a1 = new Aluguel(this.getAlugueis().size(), dataInicioAluguel, dataFimAluguel, roupaAlugada, precoAluguel, alugador);
 
@@ -356,6 +340,7 @@ public class Loja {
         if (aluguel.getAlugador().equals(user_Devolve)) {
 
             //Checando se a devolução foi feita no prazo
+            // Caso queira testar essa função de multa (mostrando o valor), basta colocar um número negativo na quantidade de semanas quando estiverdes fazendo o aluguel.
             double multa = emitirMulta(aluguel.getDataFim());
                     
             if (multa == 0) {
@@ -441,22 +426,6 @@ public class Loja {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return this.endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTel() {
-        return this.tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
     }
 
     public String getEmail() {

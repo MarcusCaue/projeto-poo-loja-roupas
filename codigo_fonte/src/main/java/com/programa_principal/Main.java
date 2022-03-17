@@ -197,8 +197,6 @@ public class Main {
 
         {
             String nome = "Mirna's Fashion Look©";
-            String rua = "Rua das Roupas Mais Lindas do Mundo, nº 85";
-            String tel = "083 99405-8932";
             String email = "mirnasFLookComercial@gmail.com";
 
             ArrayList<Roupa> roupas = new ArrayList<Roupa>();
@@ -233,34 +231,28 @@ public class Main {
             roupas.add(t2);
 
             ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-            Usuario u1 = new Usuario("Jonas de Samos", usuarios.size(), "Rua dos Filósofos Brabos", "99345-6712",
-                    "jonas@gmail.com", "1234");
+            Usuario u1 = new Usuario("Jonas de Samos", usuarios.size(), "jonas@gmail.com", "1234");
             usuarios.add(u1);
 
-            Usuario u2 = new Usuario("Amanda de Abdera", usuarios.size(), "Rua dos Filósofos Brabos", "99436-7621",
-                    "amanda@hotmail.com", "1234");
+            Usuario u2 = new Usuario("Amanda de Abdera", usuarios.size(), "amanda@hotmail.com", "1234");
             usuarios.add(u2);
 
-            Usuario u3 = new Usuario("Kleito de Esparta", usuarios.size(), "Rua dos Filósofos Brabos", "99323-3232",
-                    "kleitin@outlook.com", "1234");
+            Usuario u3 = new Usuario("Kleito de Esparta", usuarios.size(), "kleitin@outlook.com", "1234");
             usuarios.add(u3);
 
             ArrayList<FuncionarioLoja> funcionarios = new ArrayList<FuncionarioLoja>();
-            FuncionarioLoja f1 = new FuncionarioLoja("Marcus Cauê", funcionarios.size(), "Rua Pref. Leonardo, 88",
-                    "99404-6892", "caue@gerencia.com.br", "1234", "Gerente");
+            FuncionarioLoja f1 = new FuncionarioLoja("Marcus Cauê", funcionarios.size(), "caue@gerencia.com.br", "1234", "Gerente");
             funcionarios.add(f1);
 
-            FuncionarioLoja f2 = new FuncionarioLoja("Paula Miranda Barbosa", funcionarios.size(),
-                    "Rua Pref. Leonardo, 88", "99404-6892", "paula@gerencia.com.br", "1234", "Desenvolvedora");
+            FuncionarioLoja f2 = new FuncionarioLoja("Paula Miranda Barbosa", funcionarios.size(), "paula@gerencia.com.br", "1234", "Desenvolvedora");
             funcionarios.add(f2);
 
-            FuncionarioLoja f3 = new FuncionarioLoja("Priscila Mayumi", funcionarios.size(), "Rua Pref. Leonardo, 88",
-                    "99404-6892", "pri@gerencia.com.br", "1234", "Secretária");
+            FuncionarioLoja f3 = new FuncionarioLoja("Priscila Mayumi", funcionarios.size(), "pri@gerencia.com.br", "1234", "Secretária");
             funcionarios.add(f3);
 
             ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
 
-            loja = new Loja(nome, rua, tel, email, roupas, usuarios, funcionarios, alugueis);
+            loja = new Loja(nome, email, roupas, usuarios, funcionarios, alugueis);
         }
 
         Usuario usuarioLogado = null; FuncionarioLoja funcionarioLogado = null;
