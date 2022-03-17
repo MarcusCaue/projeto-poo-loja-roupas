@@ -317,7 +317,7 @@ public class Loja {
             String dataFimAluguel = formatador.format(datas.getTime());
 
             // Mostrando o preço do aluguel
-            System.out.printf("Preço final do aluguel: R$%,.2f\n", precoAluguel);
+            System.out.printf("Preço final do aluguel: R$%.2f\n", precoAluguel);
             // Criando o aluguel
             Aluguel a1 = new Aluguel(this.getAlugueis().size(), dataInicioAluguel, dataFimAluguel, roupaAlugada, precoAluguel, alugador);
 
@@ -346,7 +346,7 @@ public class Loja {
             if (multa == 0) {
                 System.out.println("Devolução concluída no prazo!\nMuito obrigado por alugar na nossa loja.");
             } else {
-                System.out.println("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de " + multa);
+                System.out.printf("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de R$%.2f\n", multa);
             }
 
             // Mudando a disponibilidade da roupa devolvida
@@ -380,7 +380,7 @@ public class Loja {
 	}
 
     public void exibirUsuarios(){
-        for(int i = 0;i < usuariosCadastrados.size();i++){
+        for(int i = 0; i < usuariosCadastrados.size(); i++){
             System.out.println("Nome: " + usuariosCadastrados.get(i).getNome());
             System.out.println("Id: " + usuariosCadastrados.get(i).getId());
             System.out.println();
@@ -388,7 +388,7 @@ public class Loja {
     }
     
     public void exibirFuncionarios(){
-        for(int i = 0;i < funcionarios.size();i++){
+        for(int i = 0; i < funcionarios.size(); i++){
             System.out.println("Nome: " + funcionarios.get(i).getNome());
             System.out.println("Id: " + funcionarios.get(i).getId());
             System.out.println("Função: " + funcionarios.get(i).getFuncao());
@@ -396,20 +396,20 @@ public class Loja {
     }
 
     public void exibirAlugueis() {
-		for(int i = 0; i < alugueis.size();i++){
-            Aluguel aluguelVerificado = alugueis.get(i);
+		for(int i = 0; i < alugueis.size(); i++){
+            Aluguel alguelAtual = alugueis.get(i);
 
-            System.out.println("Aluguel de Código: " + aluguelVerificado.getId());
-            System.out.println("Data do Início do Aluguel: " + aluguelVerificado.getDataInicio());
-            System.out.println("Data do Fim do Aluguel: " + aluguelVerificado.getDataFim());
-            System.out.println("Usuário alugador: " + aluguelVerificado.getAlugador().getNome());
-            System.out.println("Roupa alugada: " + aluguelVerificado.getRoupa().getNome());
+            System.out.println("Aluguel de Código: " + alguelAtual.getId());
+            System.out.println("Data do Realização do Aluguel: " + alguelAtual.getDataInicio());
+            System.out.println("Data do Fim do Aluguel: " + alguelAtual.getDataFim());
+            System.out.println("Usuário alugador: " + alguelAtual.getAlugador().getNome());
+            System.out.println("Roupa alugada: " + alguelAtual.getRoupa().getNome());
             System.out.println();
         }
 	}
 
     public void exibirRoupas() {
-		for(int i = 0; i < roupas.size();i++){
+		for(int i = 0; i < roupas.size(); i++){
             System.out.println("Nome: " + roupas.get(i).getNome());
             System.out.printf("Preço: R$%.2f\n", roupas.get(i).getPrecoInicial());
             System.out.println("Id: " + roupas.get(i).getId());
@@ -421,7 +421,7 @@ public class Loja {
     // Getters e Setters
     
     public String getNome() {
-        return this.nome;
+        return nome;
     }
 
     public void setNome(String nome) {
@@ -429,7 +429,7 @@ public class Loja {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -437,7 +437,7 @@ public class Loja {
     }
 
     public ArrayList<Roupa> getRoupas() {
-        return this.roupas;
+        return roupas;
     }
 
     public void setRoupas(ArrayList<Roupa> roupas) {
@@ -445,7 +445,7 @@ public class Loja {
     }
 
     public ArrayList<Usuario> getUserCadastrados() {
-        return this.usuariosCadastrados;
+        return usuariosCadastrados;
     }
 
     public void setUserCadastrados(ArrayList<Usuario> usuariosCadastrados) {
@@ -463,7 +463,7 @@ public class Loja {
     }
 
     public ArrayList<FuncionarioLoja> getFuncionarios() {
-        return this.funcionarios;
+        return funcionarios;
     }
     
     public void setFuncionarios(ArrayList<FuncionarioLoja> funcionarios) {
@@ -481,7 +481,7 @@ public class Loja {
     }
 
     public ArrayList<Aluguel> getAlugueis() {
-        return this.alugueis;
+        return alugueis;
     }
 
     public void setAlugueis(ArrayList<Aluguel> alugueis) {

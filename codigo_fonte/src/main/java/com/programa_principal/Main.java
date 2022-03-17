@@ -148,35 +148,41 @@ public class Main {
         // Devolver uma roupa
         else {
             titulo("DEVOLUÇÃO DE ROUPA");
-            System.out.print("Você deseja ver a lista de aluguéis realizados na nossa loja? ['S'/'N'] ");
-            char escolha = escaneador.nextLine().toUpperCase().charAt(0);
 
-            if (escolha == 'S') {
-                titulo("ALUGUÉIS");
-                loja.exibirAlugueis();
-            }
-
-            System.out.print("Informe o ID de um dos seus aluguéis: ");
-            int idAluguel = escaneador.nextInt();
-            
-            char decisao = 'S';
-            while (loja.verificarAluguel(idAluguel) == false) {
-                System.out.println("Aluguel não encontrado no sistema.");
-                decisao = tentarNovamente();
-
+            if (loja.getAlugueis().size() == 0) {
+                System.out.println("Não existem aluguéis realizados na nossa loja.");
+            } else {
+                System.out.print("Você deseja ver a lista de aluguéis realizados na nossa loja? ['S'/'N'] ");
+                char escolha = escaneador.nextLine().toUpperCase().charAt(0);
+    
+                if (escolha == 'S') {
+                    titulo("ALUGUÉIS");
+                    loja.exibirAlugueis();
+                }
+    
+                System.out.print("Informe o ID de um dos seus aluguéis: ");
+                int idAluguel = escaneador.nextInt();
+                
+                char decisao = 'S';
+                while (loja.verificarAluguel(idAluguel) == false) {
+                    System.out.println("Aluguel não encontrado no sistema.");
+                    decisao = tentarNovamente();
+    
+                    if (decisao == 'N') {
+                        break;
+                    } else {
+                        System.out.print("Informe o ID de um dos seus aluguéis: ");
+                        idAluguel = escaneador.nextInt();
+                    }
+                }
+    
                 if (decisao == 'N') {
-                    break;
+                    System.out.println("Devolução cancelada!");
                 } else {
-                    System.out.print("Informe o ID de um dos seus aluguéis: ");
-                    idAluguel = escaneador.nextInt();
+                    loja.devolverRoupa(idAluguel, user);
                 }
             }
 
-            if (decisao == 'N') {
-                System.out.println("Devolução cancelada!");
-            } else {
-                loja.devolverRoupa(idAluguel, user);
-            }
         }
 
         return 'S';

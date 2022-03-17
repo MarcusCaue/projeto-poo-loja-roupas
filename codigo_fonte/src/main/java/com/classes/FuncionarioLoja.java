@@ -17,7 +17,6 @@ public class FuncionarioLoja extends Usuario {
         this.funcao = novaFuncao;
     }
 
-    
     public String toString() {
         String atributosFunc = super.toString();
         atributosFunc = atributosFunc.replace("Usuario", "FuncionarioLoja");
