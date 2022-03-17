@@ -391,7 +391,7 @@ public class Loja {
         for(int i = 0;i < funcionarios.size();i++){
             System.out.println("Nome: " + funcionarios.get(i).getNome());
             System.out.println("Id: " + funcionarios.get(i).getId());
-            System.out.println();
+            System.out.println("Função: " + funcionarios.get(i).getFuncao());
         }
     }
 
