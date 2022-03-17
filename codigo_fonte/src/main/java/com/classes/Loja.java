@@ -56,8 +56,8 @@ public class Loja {
 
 		return false;
 	}
-    
-    public boolean cadastrar() {
+
+    public void cadastrar() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Comece seu cadastro para poder alugar as roupas da nossa loja!\n");
 		
@@ -91,17 +91,18 @@ public class Loja {
                 funcao = sc.nextLine();
             } while (funcao.equals(""));
 
+            // Criando um Funcionario
             FuncionarioLoja funcionario = new FuncionarioLoja(username, this.funcionarios.size(), email, senha, funcao);
             this.funcionarios.add(funcionario);
         } else {
+            // Criando um Usuário
             Usuario user = new Usuario(username, this.usuariosCadastrados.size(), email, senha);
             this.usuariosCadastrados.add(user);
         }
 	
-        return true;
 	}
     
-    public boolean cadastrarRoupa() {
+    public void cadastrarRoupa() {
 		Scanner sc = new Scanner(System.in);
 
         String nome = "";
@@ -154,16 +155,13 @@ public class Loja {
             Terno t1 = new Terno(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
             this.roupas.add(t1);
         }
-
-        return true;
 	}
 
     public boolean verificarUsuario(int idUser){
         if (idUser < 0) {
             return false;
         }
-
-        for(int i = 0; i < this.usuariosCadastrados.size(); i++){
+        for (int i = 0; i < this.usuariosCadastrados.size(); i++){
             if (this.usuariosCadastrados.get(i).getId() == idUser){
                 return true;
             }
@@ -175,13 +173,11 @@ public class Loja {
         if (idRoupa < 0) {
             return false;
         }
-
-        for(int i = 0; i < this.roupas.size(); i++){
-            if(this.roupas.get(i).getId() == idRoupa){
+        for (int i = 0; i < this.roupas.size(); i++){
+            if (this.roupas.get(i).getId() == idRoupa){
                 return true;
             }
         }
-
         return false;
     }
 
@@ -189,9 +185,8 @@ public class Loja {
         if (idFunc < 0) {
             return false;
         }
-
-        for(int i = 0; i < this.funcionarios.size(); i++){
-            if(this.funcionarios.get(i).getId() == idFunc){
+        for (int i = 0; i < this.funcionarios.size(); i++){
+            if (this.funcionarios.get(i).getId() == idFunc){
                 return true;
             }
         }
@@ -202,64 +197,42 @@ public class Loja {
         if (idAluguel < 0) {
             return false;
         }
-
-		for(int i = 0; i < this.alugueis.size(); i++) {
-			if(this.alugueis.get(i).getId() == idAluguel) {
+		for (int i = 0; i < this.alugueis.size(); i++) {
+			if (this.alugueis.get(i).getId() == idAluguel) {
                 return true;
             }
 		}
 		return false;
 	}
 
-    public boolean removerUsuario(int idUser) {
-        if (verificarUsuario(idUser) == false){
-            return false;
-        }
-        else{
-            for(int i = 0; i < this.usuariosCadastrados.size(); i++) {
-                if(this.usuariosCadastrados.get(i).getId() == idUser){
-                    this.usuariosCadastrados.remove(i);
-                }
+    public void removerUsuario(int idUser) {
+        for (int i = 0; i < this.usuariosCadastrados.size(); i++) {
+            if (this.usuariosCadastrados.get(i).getId() == idUser){
+                this.usuariosCadastrados.remove(i);
             }
-            return true;
         }
     }
 
-    public boolean removerFuncionario(int idFunc) {
-        if (verificarFuncionario(idFunc) == false){
-            return false;
-        }
-        else{
-            for(int i = 0; i < this.funcionarios.size(); i++) {
-                if(this.funcionarios.get(i).getId() == idFunc){
-                    this.funcionarios.remove(i);
-                }
+    public void removerFuncionario(int idFunc) {
+        for (int i = 0; i < this.funcionarios.size(); i++) {
+            if (this.funcionarios.get(i).getId() == idFunc){
+                this.funcionarios.remove(i);
             }
-            return true;
         }
     }
 
-    public boolean removerRoupa(int idRoupa){
-        if(verificarRoupa(idRoupa) == false){
-            return false;
-        }
-        else{
-            for(int i = 0; i < this.roupas.size(); i++){
-                if(this.roupas.get(i).getId() == idRoupa){
-                    this.roupas.remove(i);
-                }
+    public void removerRoupa(int idRoupa){
+        for (int i = 0; i < this.roupas.size(); i++){
+            if (this.roupas.get(i).getId() == idRoupa){
+                this.roupas.remove(i);
             }
         }
-        return true;
     }
 
     public boolean alugar(Usuario user) {
         Scanner entrada = new Scanner(System.in);
         
-        // Obtendo o id do usuário alugador
-        int idUser = user.getId();
-
-        Usuario alugador = this.getUserCadastrados().get(idUser);
+        Usuario alugador = user;
 
         // Obtendo a roupa a ser alugada
         char escolha;
@@ -328,7 +301,6 @@ public class Loja {
     }
 
     public void devolverRoupa(int idAluguel, Usuario user_Devolve) {
-
         Aluguel aluguel = null;
 
         for (int i = 0; i < this.alugueis.size(); i++) {
@@ -343,22 +315,20 @@ public class Loja {
             // Caso queira testar essa função de multa (mostrando o valor), basta colocar um número negativo na quantidade de semanas quando estiverdes fazendo o aluguel.
             double multa = emitirMulta(aluguel.getDataFim());
                     
-            if (multa == 0) {
-                System.out.println("Devolução concluída no prazo!\nMuito obrigado por alugar na nossa loja.");
-            } else {
-                System.out.printf("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de R$%.2f\n", multa);
-            }
-
             // Mudando a disponibilidade da roupa devolvida
             aluguel.getRoupa().setDisponibilidade(true);
             // Removendo o aluguel da lista
             this.alugueis.remove(aluguel);
 
+            if (multa == 0) {
+                System.out.println("Devolução concluída no prazo!\nMuito obrigado por alugar na nossa loja.");
+            } else {
+                System.out.printf("Oh-Ow, devolução feita fora do prazo.\nA multa aplicada foi de R$%.2f\n", multa);
+            }
         } else {
             System.out.println("Você não é o usuário responsável pelo aluguel dessa roupa!");
             System.out.println("Devolução cancelada!");
         }
-
     }
 
     public double emitirMulta(String dataFim) {

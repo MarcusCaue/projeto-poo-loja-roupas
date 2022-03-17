@@ -42,8 +42,7 @@ public class Main {
         System.out.print("\nDigite a opção que você deseja: ");
 
         Scanner escaneador = new Scanner(System.in);
-        int opcao = escaneador.nextInt();
-        escaneador.nextLine();
+        int opcao = escaneador.nextInt(); escaneador.nextLine();
 
         char escolha;
         // Sair do Menu
@@ -194,8 +193,7 @@ public class Main {
         /*
          * Inserindo alguns dados na Loja
          * As chaves foram colocadas para que essas varíaveis sejam apagadas, uma vez
-         * que elas só servem para armazenarem dados que serão enviadas ao construtor da
-         * Loja.
+         * que elas só servem para armazenar dados que serão enviadas ao construtor da Loja.
          * Logo, elas não precisam continuar ocupando espaço no programa principal.
         */
 
@@ -266,10 +264,9 @@ public class Main {
         titulo("Bem-vindo à loja Mirna's Fashion Look!");
         
         // Variáveis que vão controlar as decisões do usuário ao longo do programa
-        char option;  // Controla o Login
+        char option;        // Controla o Login
         int escolha = 1;    // Controla o Menu Inicial
-        char decisao; // Controla os Menus de Usuario e de Funcionario
-
+        
         // PROGRAMA PRINCIPAL
         while (escolha != 3) {
             // Menu Inicial
@@ -328,7 +325,7 @@ public class Main {
                                 System.out.println("Seja bem-vindo!");
                                 
                                 // Menu de Ações do Funcionário
-                                decisao = 'S';
+                                char decisao = 'S';
                                 while (decisao == 'S') {
                                     decisao = menuFuncionario(loja);
                                 }
@@ -351,6 +348,7 @@ public class Main {
                         // Verifica se a senha informada condiz com a senha cadastrada
                         else {
                             String senhaUsuario = usuarioLogado.getSenha();
+
                             if (senhaUsuario.equals(senhaLogin) == false) {
                                 System.out.println("Este usuário não está cadastrado na loja");
                                 option = tentarNovamente();
@@ -362,7 +360,7 @@ public class Main {
                                 System.out.println("Seja bem-vindo!");
                                 
                                 // Menu de Ações do Usuário
-                                decisao = 'S';
+                                char decisao = 'S';
                                 while (decisao == 'S') {
                                     decisao = menuUsuario(loja, usuarioLogado);
                                 }

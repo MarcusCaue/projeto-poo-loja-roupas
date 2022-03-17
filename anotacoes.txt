@@ -6,4 +6,12 @@
     . Verificado os métodos de exibição
     . Getters e setters verificados
     . emitirMulta()
+    . checaEmail()
+    . Verificado os métodos de verificação
+    . Verificado os métodos cadastrar() e cadastrarRoupa()
+    . Verificado os métodos de remoção
+    . Verificado o método de alugar
+    . Verificado o método de devolver
 }
+
+6 - Main verificado
