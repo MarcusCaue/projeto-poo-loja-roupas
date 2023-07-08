@@ -26,10 +26,10 @@ public class Main {
 
         System.out.print("Deseja se cadastrar no sistema da loja? ['S'/'N'] ");
         char resposta = sc.nextLine().toUpperCase().charAt(0);
-        
+
         if (resposta == 'S') {
             titulo("CADASTRO");
-            loja.cadastrar();
+            loja.cadastrar(sc);
             System.out.println("Agradecemos sua preferência!");
         } else {
             System.out.println("Até mais!");
@@ -49,7 +49,7 @@ public class Main {
         if (opcao == 4) {
             return 'N';
         }
-        // Removendo Funcionários ou Usuários 
+        // Removendo Funcionários ou Usuários
         else if (opcao == 1) {
             System.out.print("Você deseja ver a lista de Funcionários e de Usuários? ['S'/'N'] ");
             escolha = escaneador.nextLine().toUpperCase().charAt(0);
@@ -76,7 +76,7 @@ public class Main {
                 } else {
                     System.out.println("Esse funcionário não está cadastrado no sistema.");
                 }
-            } 
+            }
             // Remoção de Usuários
             else {
                 if (loja.verificarUsuario(id)) {
@@ -86,7 +86,7 @@ public class Main {
                     System.out.println("Esse usuário não está cadastrado no sistema.");
                 }
             }
-        } 
+        }
         // Remoção de roupas
         else if (opcao == 2) {
             System.out.print("Você deseja ver a lista de Roupas? ['S'/'N'] ");
@@ -110,12 +110,12 @@ public class Main {
         // Cadastro de roupa
         else {
             titulo("CADASTRO DE ROUPAS");
-       
+
             System.out.print("Deseja cadastrar uma roupa? ['S'/'N'] ");
             char resposta = escaneador.nextLine().toUpperCase().charAt(0);
-        
+
             if (resposta == 'S') {
-                loja.cadastrarRoupa();
+                loja.cadastrarRoupa(escaneador);
                 System.out.println("Roupa cadastrada com sucesso!");
             }
         }
@@ -135,15 +135,15 @@ public class Main {
         if (opcao == 3) {
             return 'N';
         }
-        // Alugar uma roupa 
+        // Alugar uma roupa
         else if (opcao == 1) {
             titulo("ALUGUEL DE ROUPA");
-            if (loja.alugar(user)) {
+            if (loja.alugar(user, escaneador)) {
                 System.out.println("Aluguel realizado com sucesso!");
             } else {
                 System.out.println("Aluguel cancelado!");
             }
-        } 
+        }
         // Devolver uma roupa
         else {
             titulo("DEVOLUÇÃO DE ROUPA");
@@ -153,20 +153,20 @@ public class Main {
             } else {
                 System.out.print("Você deseja ver a lista de aluguéis realizados na nossa loja? ['S'/'N'] ");
                 char escolha = escaneador.nextLine().toUpperCase().charAt(0);
-    
+
                 if (escolha == 'S') {
                     titulo("ALUGUÉIS");
                     loja.exibirAlugueis();
                 }
-    
+
                 System.out.print("Informe o ID de um dos seus aluguéis: ");
                 int idAluguel = escaneador.nextInt();
-                
+
                 char decisao = 'S';
                 while (loja.verificarAluguel(idAluguel) == false) {
                     System.out.println("Aluguel não encontrado no sistema.");
                     decisao = tentarNovamente();
-    
+
                     if (decisao == 'N') {
                         break;
                     } else {
@@ -174,7 +174,7 @@ public class Main {
                         idAluguel = escaneador.nextInt();
                     }
                 }
-    
+
                 if (decisao == 'N') {
                     System.out.println("Devolução cancelada!");
                 } else {
@@ -262,11 +262,11 @@ public class Main {
         Usuario usuarioLogado = null; FuncionarioLoja funcionarioLogado = null;
 
         titulo("Bem-vindo à loja Mirna's Fashion Look!");
-        
+
         // Variáveis que vão controlar as decisões do usuário ao longo do programa
         char option;        // Controla o Login
         int escolha = 1;    // Controla o Menu Inicial
-        
+
         // PROGRAMA PRINCIPAL
         while (escolha != 3) {
             // Menu Inicial
@@ -278,7 +278,7 @@ public class Main {
             // Cadastro de Usuario ou Funcionario
             if (escolha == 1) {
                 menuCadastroUser(loja);
-            } 
+            }
             // Login
             else if (escolha == 2) {
                 option = 'S';
@@ -323,7 +323,7 @@ public class Main {
                                 }
                             } else {
                                 System.out.println("Seja bem-vindo!");
-                                
+
                                 // Menu de Ações do Funcionário
                                 char decisao = 'S';
                                 while (decisao == 'S') {
@@ -358,7 +358,7 @@ public class Main {
                                 }
                             } else {
                                 System.out.println("Seja bem-vindo!");
-                                
+
                                 // Menu de Ações do Usuário
                                 char decisao = 'S';
                                 while (decisao == 'S') {
@@ -371,7 +371,7 @@ public class Main {
                 }
             }
         }
-       
+
         entrada.close();
         titulo("Muito obrigado e volte sempre!");
     }

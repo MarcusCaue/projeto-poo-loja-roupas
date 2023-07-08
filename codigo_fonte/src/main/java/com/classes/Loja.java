@@ -28,19 +28,60 @@ public class Loja {
     }
 
     // Métodos
-    
+
     // Método que vai checar se o email informado faz parte da lista de emails aceitos pela loja
+    private String validaEntrada(String message, Scanner sc) {
+        String value;
+        do {
+            System.out.print(message);
+            value = sc.nextLine();
+        } while (value.equals(""));
+
+        return value;
+    }
+
+    private void addRoupa(String tipoRoupa, String nomeRoupa, boolean disponibilidadeRoupa, String corRoupa, double precoInicialRoupa) {
+        Roupa r;
+        switch (tipoRoupa) {
+            case "Vestido":
+                r = new Vestido(this.roupas.size(), nomeRoupa, corRoupa, disponibilidadeRoupa, precoInicialRoupa);
+                break;
+
+            case "Terno":
+                r = new Terno(this.roupas.size(), nomeRoupa, corRoupa, disponibilidadeRoupa, precoInicialRoupa);
+                break;
+
+            case "Pajem":
+                r = new Pajem(this.roupas.size(), nomeRoupa, corRoupa, disponibilidadeRoupa, precoInicialRoupa);
+                break;
+
+            case "Calca":
+                r = new Calca(this.roupas.size(), nomeRoupa, corRoupa, disponibilidadeRoupa, precoInicialRoupa);
+                break;
+
+            case "BermudaShort":
+                r = new BermudaShort(this.roupas.size(), nomeRoupa, corRoupa, disponibilidadeRoupa, precoInicialRoupa);
+                break;
+
+            default:
+                r = new Camisa(this.roupas.size(), nomeRoupa, corRoupa, disponibilidadeRoupa, precoInicialRoupa);
+                break;
+        }
+
+        this.roupas.add(r);
+    }
+
     public boolean checaEmail(String email) {
 
-		String dominio = "";
+        int indexOfArroba = email.indexOf("@");
 
 		// Verificando se existe um @ no email informado
-		if (email.indexOf("@") == -1) {
+		if (indexOfArroba == -1) {
 			return false;
 		}
 
 		// Obtendo o domínio
-		dominio = email.substring(email.indexOf("@"));
+		String dominio = email.substring(indexOfArroba);
 
 		// Lista de domínios aceitos
 		ArrayList<String> listaDominios = new ArrayList<String>();
@@ -57,39 +98,26 @@ public class Loja {
 		return false;
 	}
 
-    public void cadastrar() {
-		Scanner sc = new Scanner(System.in);
+    public void cadastrar(Scanner sc) {
 		System.out.println("Comece seu cadastro para poder alugar as roupas da nossa loja!\n");
-		
+
 		// Leitura do nome do usuário
-		String username = "";
-		do {
-			System.out.print("Digite o seu nome completo: ");
-			username = sc.nextLine();
-		} while (username.equals(""));
-	
+		String username = validaEntrada("Digite o seu nome completo: ", sc);
+        // Leitura da Senha
+        String senha = validaEntrada("Digite uma senha válida: ", sc);
+
 		// Leitura do email
-        String email = "";
+        String email;
         do {
             System.out.print("Digite um e-mail válido para contato: ");
             email = sc.nextLine();
         } while (email.equals("") || checaEmail(email) == false);
-	
-		// Leitura da Senha
-		String senha = "";
-		do {
-			System.out.print("Digite uma senha válida: ");
-			senha = sc.nextLine();
-		} while(senha.equals(""));
 
+        // Cadastrando um Usuário ou Funcionário baseado no domínio do seu email
         if (email.endsWith("@gerencia.com.br")) {
 
             // Leitura da função do funcionário da loja
-            String funcao = "";
-            do {
-                System.out.print("Digite a sua função dentro da loja: ");
-                funcao = sc.nextLine();
-            } while (funcao.equals(""));
+            String funcao = validaEntrada("Digite a sua função dentro da loja: ", sc);
 
             // Criando um Funcionario
             FuncionarioLoja funcionario = new FuncionarioLoja(username, this.funcionarios.size(), email, senha, funcao);
@@ -99,17 +127,11 @@ public class Loja {
             Usuario user = new Usuario(username, this.usuariosCadastrados.size(), email, senha);
             this.usuariosCadastrados.add(user);
         }
-	
-	}
-    
-    public void cadastrarRoupa() {
-		Scanner sc = new Scanner(System.in);
 
-        String nome = "";
-		do {
-			System.out.print("Digite o nome da roupa: ");
-			nome = sc.nextLine();
-		} while(nome.equals(""));
+	}
+
+    public void cadastrarRoupa(Scanner sc) {
+        String nome = validaEntrada("Digite o nome da roupa: ", sc);
 
         ArrayList<String> tiposRoupa = new ArrayList<String>();
         tiposRoupa.add("vestido");
@@ -125,44 +147,22 @@ public class Loja {
             tipo = sc.nextLine();
         } while (tipo.equals("") || tiposRoupa.contains(tipo) == false);
 
-        String cor = "";
-        do {
-            System.out.print("Digite a cor da roupa: ");
-		    cor = sc.nextLine();
-        } while (cor.equals(""));
+        String cor = validaEntrada("Digite a cor da roupa: ", sc);
 
 		System.out.print("Digite o preço da da roupa: ");
 		double precoInicial = sc.nextDouble();
-        
+
 		boolean disponibilidade = true;
 
-        if (tipo.equals("vestido")) {
-            Vestido v1 = new Vestido(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
-            this.roupas.add(v1);
-        } else if (tipo.equals("calca")) {
-            Calca c1 = new Calca(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
-            this.roupas.add(c1);
-        } else if (tipo.equals("bermuda/short")) {
-            BermudaShort bs1 = new BermudaShort(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
-            this.roupas.add(bs1);
-        } else if (tipo.equals("camisa")) {
-            Camisa c1 = new Camisa(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
-            this.roupas.add(c1);
-        } else if (tipo.equals("pajem")) {
-            Pajem p1 = new Pajem(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
-            this.roupas.add(p1);
-        } else {
-            Terno t1 = new Terno(this.roupas.size(), nome, cor, disponibilidade, precoInicial);
-            this.roupas.add(t1);
-        }
+        addRoupa(tipo, nome, disponibilidade, cor, precoInicial);
 	}
 
     public boolean verificarUsuario(int idUser){
         if (idUser < 0) {
             return false;
         }
-        for (int i = 0; i < this.usuariosCadastrados.size(); i++){
-            if (this.usuariosCadastrados.get(i).getId() == idUser){
+        for (Usuario usuariosCadastrado : this.usuariosCadastrados) {
+            if (usuariosCadastrado.getId() == idUser) {
                 return true;
             }
         }
@@ -229,15 +229,10 @@ public class Loja {
         }
     }
 
-    public boolean alugar(Usuario user) {
-        Scanner entrada = new Scanner(System.in);
-        
-        Usuario alugador = user;
-
+    public boolean alugar(Usuario user, Scanner sc) {
         // Obtendo a roupa a ser alugada
-        char escolha;
         System.out.print("Você deseja ver a lista de Roupas cadastradas? ['S'/'N'] ");
-        escolha = entrada.nextLine().toUpperCase().charAt(0);
+        char escolha = sc.nextLine().toUpperCase().charAt(0);
 
         if (escolha == 'S') {
             System.out.println("\n=========== " + "ROUPAS" + " ===========\n");
@@ -245,12 +240,12 @@ public class Loja {
         }
 
         System.out.print("Informe o ID da roupa a ser alugada: ");
-        int idRoupa = entrada.nextInt(); entrada.nextLine();
-        
+        int idRoupa = sc.nextInt(); sc.nextLine();
+
         while (idRoupa != -1 && verificarRoupa(idRoupa) == false) {
             System.out.println("ID inválido. Talvez essa roupa com esse ID não esteja cadastrada no sistema.");
             System.out.print("Informe um outro ID.\nCaso queira encerrar o aluguel, digite '-1': ");
-            idRoupa = entrada.nextInt(); entrada.nextLine();
+            idRoupa = sc.nextInt(); sc.nextLine();
         }
 
         if (idRoupa == -1) {
@@ -258,7 +253,7 @@ public class Loja {
         } else {
             Roupa roupaAlugada = this.getRoupas().get(idRoupa);
 
-            if (roupaAlugada.getDisponibilidade() == true) {
+            if (roupaAlugada.getDisponibilidade()) {
                 // Tirando a disponibilidade da roupa
                 roupaAlugada.setDisponibilidade(false);
             } else {
@@ -268,7 +263,7 @@ public class Loja {
 
             // Obtendo a quantidade de semanas que o usuário deseja alugar a roupa
             System.out.print("\nPor quantas semanas você quer alugar a roupa? (R$ 15.00 por semana): ");
-            int quantSemanas = entrada.nextInt(); entrada.nextLine();
+            int quantSemanas = sc.nextInt(); sc.nextLine();
 
             // Preço do Aluguel
             double precoAluguel = roupaAlugada.getPrecoInicial() + (15 * quantSemanas);
@@ -279,7 +274,7 @@ public class Loja {
 
             // Obtém a data do sistema no momento em que o usuário está executando o programa e o formata conforme o estilo citado acima
             String dataInicioAluguel = formatador.format(datas.getTime());
-            
+
             // Obtém a data do sistema no formato que a classe Calendar aceita
             datas.setTime(datas.getTime());
 
@@ -292,10 +287,10 @@ public class Loja {
             // Mostrando o preço do aluguel
             System.out.printf("Preço final do aluguel: R$%.2f\n", precoAluguel);
             // Criando o aluguel
-            Aluguel a1 = new Aluguel(this.getAlugueis().size(), dataInicioAluguel, dataFimAluguel, roupaAlugada, precoAluguel, alugador);
+            Aluguel aluguel = new Aluguel(this.getAlugueis().size(), dataInicioAluguel, dataFimAluguel, roupaAlugada, precoAluguel, user);
 
-            alugueis.add(a1);
-            
+            alugueis.add(aluguel);
+
             return true;
         }
     }
@@ -314,7 +309,7 @@ public class Loja {
             //Checando se a devolução foi feita no prazo
             // Caso queira testar essa função de multa (mostrando o valor), basta colocar um número negativo na quantidade de semanas quando estiverdes fazendo o aluguel.
             double multa = emitirMulta(aluguel.getDataFim());
-                    
+
             // Mudando a disponibilidade da roupa devolvida
             aluguel.getRoupa().setDisponibilidade(true);
             // Removendo o aluguel da lista
@@ -340,7 +335,7 @@ public class Loja {
 		LocalDate dataFinal = LocalDate.of(ano, mes, dia);
 		Period periodo = Period.between(dataAtual, dataFinal);
 		int qtdDias = periodo.getDays() + periodo.getMonths() * 30;
-        
+
         double multa = 0;
         if (qtdDias < 0) {
             multa = (qtdDias * 1.50) * -1;
@@ -350,26 +345,24 @@ public class Loja {
 	}
 
     public void exibirUsuarios(){
-        for(int i = 0; i < usuariosCadastrados.size(); i++){
-            System.out.println("Nome: " + usuariosCadastrados.get(i).getNome());
-            System.out.println("Id: " + usuariosCadastrados.get(i).getId());
+        for (Usuario usuariosCadastrado : usuariosCadastrados) {
+            System.out.println("Nome: " + usuariosCadastrado.getNome());
+            System.out.println("Id: " + usuariosCadastrado.getId());
             System.out.println();
         }
     }
-    
+
     public void exibirFuncionarios(){
-        for(int i = 0; i < funcionarios.size(); i++){
-            System.out.println("Nome: " + funcionarios.get(i).getNome());
-            System.out.println("Id: " + funcionarios.get(i).getId());
-            System.out.println("Função: " + funcionarios.get(i).getFuncao());
+        for (FuncionarioLoja funcionario : funcionarios) {
+            System.out.println("Nome: " + funcionario.getNome());
+            System.out.println("Id: " + funcionario.getId());
+            System.out.println("Função: " + funcionario.getFuncao());
             System.out.println();
         }
     }
 
     public void exibirAlugueis() {
-		for(int i = 0; i < alugueis.size(); i++){
-            Aluguel alguelAtual = alugueis.get(i);
-
+        for (Aluguel alguelAtual : alugueis) {
             System.out.println("Aluguel de Código: " + alguelAtual.getId());
             System.out.println("Data do Realização do Aluguel: " + alguelAtual.getDataInicio());
             System.out.println("Data do Fim do Aluguel: " + alguelAtual.getDataFim());
@@ -380,17 +373,17 @@ public class Loja {
 	}
 
     public void exibirRoupas() {
-		for(int i = 0; i < roupas.size(); i++){
-            System.out.println("Nome: " + roupas.get(i).getNome());
-            System.out.printf("Preço: R$%.2f\n", roupas.get(i).getPrecoInicial());
-            System.out.println("Id: " + roupas.get(i).getId());
-            System.out.println("Disponibilidade: " + roupas.get(i).getDisponibilidade());
+        for (Roupa roupa : roupas) {
+            System.out.println("Nome: " + roupa.getNome());
+            System.out.printf("Preço: R$%.2f\n", roupa.getPrecoInicial());
+            System.out.println("Id: " + roupa.getId());
+            System.out.println("Disponibilidade: " + roupa.getDisponibilidade());
             System.out.println();
         }
 	}
 
     // Getters e Setters
-    
+
     public String getNome() {
         return nome;
     }
@@ -436,7 +429,7 @@ public class Loja {
     public ArrayList<FuncionarioLoja> getFuncionarios() {
         return funcionarios;
     }
-    
+
     public void setFuncionarios(ArrayList<FuncionarioLoja> funcionarios) {
         this.funcionarios = funcionarios;
     }
