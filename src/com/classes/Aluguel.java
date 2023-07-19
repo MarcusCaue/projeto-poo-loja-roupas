@@ -5,7 +5,7 @@
 */
 
 package com.classes;
-import com.classes.roupas.*;
+import com.classes.roupas.Roupa;
 
 public class Aluguel {
 
@@ -16,16 +16,13 @@ public class Aluguel {
 	private double valorAluguel;
 	private Usuario alugador;
 
-	// Ent -> "Entrada"
-	public Aluguel(int idEnt, String dataInicioEnt, String dataFimEnt, Roupa roupaEnt, double valorAluguelEnt, Usuario alugadorEnt) {
-
-		this.id = idEnt;
-		this.dataInicio = dataInicioEnt;
-		this.dataFim = dataFimEnt;
-		this.roupa = roupaEnt;
-		this.valorAluguel = valorAluguelEnt;
-		this.alugador = alugadorEnt;
-
+	public Aluguel(int id, String dataInicio, String dataFim, Roupa roupa, double valorAluguel, Usuario alugador) {
+		this.id = id;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+		this.roupa = roupa;
+		this.valorAluguel = valorAluguel;
+		this.alugador = alugador;
 	}
 
 	public int getId() {

@@ -4,17 +4,17 @@ public class FuncionarioLoja extends Usuario {
 
     private String funcao;
 
-    public FuncionarioLoja(String novoNome, int novoId, String novoEmail, String novaSenha, String novaFuncao) {
-        super(novoNome, novoId, novoEmail, novaSenha);
-        this.funcao = novaFuncao;
+    public FuncionarioLoja(String nome, int id, String email, String senha, String funcao) {
+        super(nome, id, email, senha);
+        this.funcao = funcao;
     }
 
     public String getFuncao() {
         return this.funcao;
     }
 
-    public void setFuncao(String novaFuncao) {
-        this.funcao = novaFuncao;
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
     }
 
     public String toString() {

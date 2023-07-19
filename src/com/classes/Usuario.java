@@ -2,17 +2,16 @@ package com.classes;
 
 public class Usuario {
 
-	private String nome;
 	private int id;
+	private String nome;
 	private String email;
 	private String senha;
 
-	// Ent = ENTRADA
-	public Usuario(String nomeEnt, int idEnt, String emailEnt, String senhaEnt) {
-		this.nome = nomeEnt;
-		this.id = idEnt;
-		this.email = emailEnt;
-		this.senha = senhaEnt;
+	public Usuario(String nome, int id, String email, String senha) {
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
 	}
 
 	public String getNome() {
