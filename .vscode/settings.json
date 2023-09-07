@@ -1,0 +1,4 @@
+{
+  "java.completion.guessMethodArguments": "auto",
+  "java.inlayHints.parameterNames.enabled": "none"
+}

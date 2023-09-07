@@ -1,6 +1,7 @@
 package com.classes;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Functions {
   Loja loja;
@@ -128,8 +129,8 @@ public class Functions {
 
   public char menuFuncionario() {
     this.menu(
-      "Menu de Funcionários", 
-      "1 - Remoção de usuário ou funcionário", "2 - Remover roupa", "3 - Cadastrar roupa", "4 - Sair");
+        "Menu de Funcionários",
+        "1 - Remoção de usuário ou funcionário", "2 - Remover roupa", "3 - Cadastrar roupa", "4 - Sair");
 
     byte opcao = this.leiaValidaEntrada((byte) 1, (byte) 4);
 
@@ -138,7 +139,7 @@ public class Functions {
       // Sair do menu
       case 4:
         return 'N';
-      
+
       // Remoção de um usuário ou funcionário
       case 1:
         escolha = this.leiaValidaEntrada("Você deseja ver a lista de Funcionários e de Usuários?");
@@ -210,4 +211,90 @@ public class Functions {
 
     return 'S';
   }
+
+  public boolean validaEmail(String email) {
+    // Verificando se é um email válido
+    Pattern regex = Pattern
+        .compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(gmail.com|outlook.com|hotmail.com|gerencia.com.br)$");
+
+    if (regex.matcher(email).find()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public char loginFunc(FuncionarioLoja funcionario, String email, String senha) {
+    char option = 'N';
+
+    // Funcionário não cadastrado
+    if (funcionario == null) {
+      System.out.println("Este funcionário não está cadastrado na loja");
+      option = this.leiaValidaEntrada("Quer tentar novamente?");
+
+      // Tela de cadastro
+      if (option == 'N') {
+        this.menuCadastroUsuario();
+      }
+    }
+    // Verificando se a senha informada no login condiz com a senha do funcionário cadastrado
+    else {
+      String senhaFuncionarioCadastrado = funcionario.getSenha();
+
+      // Menu de Ações do Funcionário 
+      if (senhaFuncionarioCadastrado.equals(senha)) {
+        System.out.println("Seja bem-vindo!");
+
+        char continueInMenu = 'S';
+
+        while (continueInMenu == 'S') {
+          continueInMenu = this.menuFuncionario();
+        }
+
+        option = 'N';
+      }
+
+    }
+
+    return option;
+  }
+
+  public char loginUsuario() {
+    char option = 'N';
+    return option;
+  }
+
+  public void login() {
+    char connected = 'S';
+
+    while (connected == 'S') {
+      this.titulo("LOGIN");
+
+      // Leitura dos dados de conexão
+      System.out.print("Insira o seu email: ");
+      String emailLogin = this.sc.nextLine();
+      System.out.print("Digite a sua senha: ");
+      String senhaLogin = this.sc.nextLine();
+
+      // Email inválido
+      if (validaEmail(emailLogin) == false) {
+        System.out.println("Talvez você tenha informado um email inválido");
+
+        connected = this.leiaValidaEntrada("Quer tentar novamente?");
+
+        // Exibe uma tela de cadastro
+        if (connected == 'N')
+          this.menuCadastroUsuario();
+      }
+      // Verificando se há funcionário cadastrado com o email informado
+      else if (emailLogin.endsWith("@gerencia.com.br")) {
+        FuncionarioLoja funcionario = this.loja.getFuncionario(emailLogin);
+
+        connected = this.loginFunc(funcionario, emailLogin, senhaLogin);
+      }
+
+    }
+
+  }
+
 }

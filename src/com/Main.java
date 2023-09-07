@@ -22,15 +22,17 @@ public class Main {
     func.titulo("Bem-vindo à loja Mirna's Fashion Look!");
 
     // Variáveis que vão controlar as decisões do usuário ao longo do programa
-    char option; // Controla o Login
+    char option = 'S'; // Controla o Login
     int escolha = 1; // Controla o Menu Inicial
 
     // PROGRAMA PRINCIPAL
     while (escolha != 3) {
       // Menu Inicial
       func.menu(
-          "Menu Inicial",
-          "1 - Cadastrar-se no sistema", "2 - Fazer o login", "3 - Sair");
+        "Menu Inicial",
+        "1 - Cadastrar-se no sistema", "2 - Fazer o login", "3 - Sair"
+      );
+      
       escolha = func.leiaValidaEntrada((byte) 1, (byte) 3);
 
       entrada.nextLine();
@@ -41,11 +43,12 @@ public class Main {
       }
       // Login
       else if (escolha == 2) {
-        option = 'S';
         while (option == 'S') {
           func.titulo("LOGIN");
+
           System.out.print("Insira o seu email: ");
           String emailLogin = entrada.nextLine();
+
           System.out.print("Digite a sua senha: ");
           String senhaLogin = entrada.nextLine();
 
