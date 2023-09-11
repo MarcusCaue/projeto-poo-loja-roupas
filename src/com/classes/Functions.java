@@ -21,16 +21,18 @@ public class Functions {
       opcao = this.sc.nextByte();
     }
 
+    this.sc.nextLine();
+
     return opcao;
   }
 
   public char leiaValidaEntrada(String msg) {
     System.out.print(msg + " ['S'/'N'] ");
-    char escolha = this.sc.next().toUpperCase().charAt(0);
+    char escolha = this.sc.nextLine().toUpperCase().charAt(0);
 
     while (escolha != 'S' && escolha != 'N') {
       System.out.print("Valor inválido. Digite novamente a opção que você deseja: ");
-      escolha = this.sc.next().toUpperCase().charAt(0);
+      escolha = this.sc.nextLine().toUpperCase().charAt(0);
     }
 
     return escolha;
@@ -52,15 +54,9 @@ public class Functions {
   }
 
   public void menuCadastroUsuario() {
-    char escolha = this.leiaValidaEntrada("Deseja se cadastrar no sistema da loja?");
-
-    if (escolha == 'S') {
-      this.titulo("CADASTRO");
-      loja.cadastrar(this.sc);
-      System.out.println("Agradecemos sua preferência!");
-    } else {
-      System.out.println("Até mais!");
-    }
+    this.titulo("CADASTRO");
+    loja.cadastrar(this.sc);
+    System.out.println("Agradecemos sua preferência!");
   }
 
   public char menuUsuario(Usuario usuarioLogado) {
@@ -213,7 +209,8 @@ public class Functions {
   }
 
   public boolean validaEmail(String email) {
-    // Verificando se é um email válido
+    // Verificando se é um email válido -> Pattern obtido da Internet, com algumas
+    // adaptações
     Pattern regex = Pattern
         .compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(gmail.com|outlook.com|hotmail.com|gerencia.com.br)$");
 
@@ -222,6 +219,13 @@ public class Functions {
     }
 
     return false;
+  }
+
+  public void desejaCadastrar() {
+    char desejaCadastrar = this.leiaValidaEntrada("Deseja se cadastrar?");
+
+    if (desejaCadastrar == 'S')
+      this.menuCadastroUsuario();
   }
 
   public char loginFunc(FuncionarioLoja funcionario, String email, String senha) {
@@ -237,11 +241,12 @@ public class Functions {
         this.menuCadastroUsuario();
       }
     }
-    // Verificando se a senha informada no login condiz com a senha do funcionário cadastrado
+    // Verificando se a senha informada no login condiz com a senha do funcionário
+    // cadastrado
     else {
       String senhaFuncionarioCadastrado = funcionario.getSenha();
 
-      // Menu de Ações do Funcionário 
+      // Menu de Ações do Funcionário
       if (senhaFuncionarioCadastrado.equals(senha)) {
         System.out.println("Seja bem-vindo!");
 
@@ -259,12 +264,48 @@ public class Functions {
     return option;
   }
 
-  public char loginUsuario() {
+  public char loginUsuario(Usuario usuario, String email, String senha) {
     char option = 'N';
+
+    // Usuário não cadastrado
+    if (usuario == null) {
+      System.out.println("Este usuário não está cadastrado na loja");
+      option = this.leiaValidaEntrada("Quer tentar novamente?");
+
+      // Tela de cadastro
+      if (option == 'N') 
+        this.desejaCadastrar();
+      
+    }
+    // Comparar as senhas
+    else {
+      String senhaUsuarioCadastrado = usuario.getSenha();
+
+      if (senhaUsuarioCadastrado.equals(senha) == false) {
+        System.out.println("Este usuário não está cadastrado na loja");
+        option = this.leiaValidaEntrada("Quer tentar novamente?");
+
+        // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+        if (option == 'N')
+          this.desejaCadastrar();
+
+      } else {
+        System.out.println("Seja bem-vindo!");
+
+        // Menu de Ações do Usuário
+        char continueInMenu = 'S';
+
+        while (continueInMenu == 'S') {
+          continueInMenu = this.menuUsuario(usuario);
+        }
+        option = 'N';
+      }
+    }
+
     return option;
   }
 
-  public void login() {
+  public char login() {
     char connected = 'S';
 
     while (connected == 'S') {
@@ -284,7 +325,7 @@ public class Functions {
 
         // Exibe uma tela de cadastro
         if (connected == 'N')
-          this.menuCadastroUsuario();
+          this.desejaCadastrar();
       }
       // Verificando se há funcionário cadastrado com o email informado
       else if (emailLogin.endsWith("@gerencia.com.br")) {
@@ -292,9 +333,16 @@ public class Functions {
 
         connected = this.loginFunc(funcionario, emailLogin, senhaLogin);
       }
+      // Verificando se há usuário cadastrado com o email informado
+      else {
+        Usuario usuario = this.loja.getUsuario(emailLogin);
+
+        connected = this.loginUsuario(usuario, emailLogin, senhaLogin);
+      }
 
     }
 
+    return connected;
   }
 
 }

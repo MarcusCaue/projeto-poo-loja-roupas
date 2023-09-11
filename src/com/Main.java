@@ -35,8 +35,6 @@ public class Main {
       
       escolha = func.leiaValidaEntrada((byte) 1, (byte) 3);
 
-      entrada.nextLine();
-
       // Cadastro de Usuario ou Funcionario
       if (escolha == 1) {
         func.menuCadastroUsuario();
@@ -44,93 +42,96 @@ public class Main {
       // Login
       else if (escolha == 2) {
         while (option == 'S') {
-          func.titulo("LOGIN");
 
-          System.out.print("Insira o seu email: ");
-          String emailLogin = entrada.nextLine();
+          option = func.login();
 
-          System.out.print("Digite a sua senha: ");
-          String senhaLogin = entrada.nextLine();
+          // func.titulo("LOGIN");
 
-          // Caso em que o email é inválido
-          if (loja.checaEmail(emailLogin) == false) {
-            System.out.println("Talvez você tenha informado um email inválido");
-            option = func.leiaValidaEntrada("Quer tentar novamente?");
-            // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
-            if (option == 'N') {
-              func.menuCadastroUsuario();
-            }
-          }
-          // Verifica se existe um funcionário cadastrado com esse email
-          else if (emailLogin.endsWith("@gerencia.com.br")) {
-            funcionarioLogado = loja.getFuncionario(emailLogin);
+          // System.out.print("Insira o seu email: ");
+          // String emailLogin = entrada.nextLine();
 
-            if (funcionarioLogado == null) {
-              System.out.println("Este funcionário não está cadastrado na loja");
-              option = func.leiaValidaEntrada("Quer tentar novamente?");
-              // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
-              if (option == 'N') {
-                func.menuCadastroUsuario();
-              }
-            }
-            // Verifica se a senha informada condiz com a senha cadastrada
-            else {
-              String senhaFuncionario = funcionarioLogado.getSenha();
+          // System.out.print("Digite a sua senha: ");
+          // String senhaLogin = entrada.nextLine();
 
-              if (senhaLogin.equals(senhaFuncionario) == false) {
-                System.out.println("Este funcionário não está cadastrado na loja");
-                option = func.leiaValidaEntrada("Quer tentar novamente?");
-                // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
-                if (option == 'N') {
-                  func.menuCadastroUsuario();
-                }
-              } else {
-                System.out.println("Seja bem-vindo!");
+          // // Caso em que o email é inválido
+          // if (loja.checaEmail(emailLogin) == false) {
+          //   System.out.println("Talvez você tenha informado um email inválido");
+          //   option = func.leiaValidaEntrada("Quer tentar novamente?");
+          //   // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+          //   if (option == 'N') {
+          //     func.menuCadastroUsuario();
+          //   }
+          // }
+          // // Verifica se existe um funcionário cadastrado com esse email
+          // else if (emailLogin.endsWith("@gerencia.com.br")) {
+          //   funcionarioLogado = loja.getFuncionario(emailLogin);
 
-                // Menu de Ações do Funcionário
-                char decisao = 'S';
-                while (decisao == 'S') {
-                  decisao = func.menuFuncionario();
-                }
-                option = 'N';
-              }
-            }
-          }
-          // Verifica se existe um usuário cadastrado com esse email
-          else {
-            usuarioLogado = loja.getUsuario(emailLogin);
+          //   if (funcionarioLogado == null) {
+          //     System.out.println("Este funcionário não está cadastrado na loja");
+          //     option = func.leiaValidaEntrada("Quer tentar novamente?");
+          //     // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+          //     if (option == 'N') {
+          //       func.menuCadastroUsuario();
+          //     }
+          //   }
+          //   // Verifica se a senha informada condiz com a senha cadastrada
+          //   else {
+          //     String senhaFuncionario = funcionarioLogado.getSenha();
 
-            if (usuarioLogado == null) {
-              System.out.println("Este usuário não está cadastrado na loja");
-              option = func.leiaValidaEntrada("Quer tentar novamente?");
-              // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
-              if (option == 'N') {
-                func.menuCadastroUsuario();
-              }
-            }
-            // Verifica se a senha informada condiz com a senha cadastrada
-            else {
-              String senhaUsuario = usuarioLogado.getSenha();
+          //     if (senhaLogin.equals(senhaFuncionario) == false) {
+          //       System.out.println("Este funcionário não está cadastrado na loja");
+          //       option = func.leiaValidaEntrada("Quer tentar novamente?");
+          //       // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+          //       if (option == 'N') {
+          //         func.menuCadastroUsuario();
+          //       }
+          //     } else {
+          //       System.out.println("Seja bem-vindo!");
 
-              if (senhaUsuario.equals(senhaLogin) == false) {
-                System.out.println("Este usuário não está cadastrado na loja");
-                option = func.leiaValidaEntrada("Quer tentar novamente?");
-                // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
-                if (option == 'N') {
-                  func.menuCadastroUsuario();
-                }
-              } else {
-                System.out.println("Seja bem-vindo!");
+          //       // Menu de Ações do Funcionário
+          //       char decisao = 'S';
+          //       while (decisao == 'S') {
+          //         decisao = func.menuFuncionario();
+          //       }
+          //       option = 'N';
+          //     }
+          //   }
+          // }
+          // // Verifica se existe um usuário cadastrado com esse email
+          // else {
+          //   usuarioLogado = loja.getUsuario(emailLogin);
 
-                // Menu de Ações do Usuário
-                char decisao = 'S';
-                while (decisao == 'S') {
-                  decisao = func.menuUsuario(usuarioLogado);
-                }
-                option = 'N';
-              }
-            }
-          }
+          //   if (usuarioLogado == null) {
+          //     System.out.println("Este usuário não está cadastrado na loja");
+          //     option = func.leiaValidaEntrada("Quer tentar novamente?");
+          //     // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+          //     if (option == 'N') {
+          //       func.menuCadastroUsuario();
+          //     }
+          //   }
+          //   // Verifica se a senha informada condiz com a senha cadastrada
+          //   else {
+          //     String senhaUsuario = usuarioLogado.getSenha();
+
+          //     if (senhaUsuario.equals(senhaLogin) == false) {
+          //       System.out.println("Este usuário não está cadastrado na loja");
+          //       option = func.leiaValidaEntrada("Quer tentar novamente?");
+          //       // Caso o usuário não consiga logar, perguntar se ele deseja se cadastrar
+          //       if (option == 'N') {
+          //         func.menuCadastroUsuario();
+          //       }
+          //     } else {
+          //       System.out.println("Seja bem-vindo!");
+
+          //       // Menu de Ações do Usuário
+          //       char decisao = 'S';
+          //       while (decisao == 'S') {
+          //         decisao = func.menuUsuario(usuarioLogado);
+          //       }
+          //       option = 'N';
+          //     }
+          //   }
+          // }
         }
       }
     }
